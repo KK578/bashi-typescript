@@ -16,3 +16,5 @@ if (environmentLoaded.error) {
 
     process.exit(error.errno);
 }
+
+require('./src/slack-connection-manager/index.js');
