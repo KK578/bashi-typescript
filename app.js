@@ -5,8 +5,8 @@ if (environmentLoaded.error) {
     const error = environmentLoaded.error;
 
     switch (error.code) {
-        case "ENOENT":
-            console.error("No .env file was found.");
+        case 'ENOENT':
+            console.error('No .env file was found.');
             break;
 
         default:
