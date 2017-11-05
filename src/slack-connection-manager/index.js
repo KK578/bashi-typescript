@@ -1,23 +1,25 @@
 const botToken = process.env.SLACK_BOT_TOKEN;
 
-// Slack APIs
-const SlackClient = require('@slack/client');
-const rtm = new SlackClient.RtmClient(botToken);
-const web = new SlackClient.WebClient(botToken);
-const clientEvents = SlackClient.CLIENT_EVENTS.RTM;
+////////////////////////////////////////////////////////////
+// API Managers
+const RealTimeMessageManager = require('./RealTimeMessageManager.js');
+const WebApiManager = require('./WebApiManager.js');
+let rtm;
+let web;
 
 class SlackConnectionManager {
     constructor() {
         if (!SlackConnectionManager._instance) {
-            // Data about the bot.
-            this.bot = {};
+            // RTM API
+            rtm = new RealTimeMessageManager(botToken);
+            rtm.on('authenticated', ((bot) => {
+                this.bot = bot;
+            }).bind(this));
 
-            ///////////////////////////////////////////////////////////
-            // Subscribe and connect.
-            rtm.on(clientEvents.AUTHENTICATED, this.onAuthenticated.bind(this));
-            rtm.on(clientEvents.RTM_CONNECTION_OPENED, this.onConnected.bind(this));
-            rtm.on(clientEvents.RAW_MESSAGE, this.onMessage.bind(this));
+            // Web API
+            web = new WebApiManager(botToken);
 
+            // Singleton management.
             SlackConnectionManager._instance = this;
         }
 
@@ -28,42 +30,19 @@ class SlackConnectionManager {
         rtm.start();
     }
 
-    ///////////////////////////////////////////////////////////
-    // Event callbacks
-    onAuthenticated(rtmStartData) {
-        console.log(rtmStartData);
-        this.bot.id = rtmStartData.self.id;
-        this.bot.name = rtmStartData.self.name;
-
-        console.log(`${this.bot.name}: Logged in!`);
+    ////////////////////////////////////////////////////////
+    // RealTimeMessageManager
+    subscribeToRtm(eventName, callback) {
+        rtm.on(eventName, callback);
     }
 
-    onConnected() {
-        console.log(`${this.bot.name}: Connected!`);
-    }
-
-    onMessage(rtmData) {
-        const data = JSON.parse(rtmData);
-
-        switch (data.type) {
-            case 'message':
-                console.log(data);
-                break;
-
-            default:
-                console.debug(`SlackConnectionManager/onMessage ~ Unchecked Message Type: '${data.type}'`, data);
-                // falls through
-            case 'hello':
-            case 'pong':
-            case 'reconnect_url':
-            case 'user_typing':
-                // Do not care about these events at the moment.
-                break;
-        }
+    ////////////////////////////////////////////////////////
+    // WebApiManager
+    sendMessage(message) {
+        web.sendMessage(message);
     }
 }
 
 const instance = new SlackConnectionManager();
-Object.freeze(instance);
 
 module.exports = instance;
