@@ -12,10 +12,6 @@ class SlackConnectionManager {
         if (!SlackConnectionManager._instance) {
             // RTM API
             rtm = new RealTimeMessageManager(botToken);
-            rtm.on('authenticated', ((bot) => {
-                this.bot = bot;
-            }).bind(this));
-
             // Web API
             web = new WebApiManager(botToken);
 
@@ -28,6 +24,16 @@ class SlackConnectionManager {
 
     start() {
         rtm.start();
+    }
+
+    ////////////////////////////////////////////////////////
+    // Slack Stuff
+    getUserFromId(id) {
+        return rtm.users.filter((user) => user.id === id)[0];
+    }
+
+    isPrivateMessage(channel) {
+        return rtm.instantMessages.filter((im) => im.id === channel).length === 1;
     }
 
     ////////////////////////////////////////////////////////
@@ -44,5 +50,4 @@ class SlackConnectionManager {
 }
 
 const instance = new SlackConnectionManager();
-
 module.exports = instance;

@@ -69,7 +69,7 @@
     "space-infix-ops": "error",
 
     // ES6
-    "arrow-body-style": [ "error", "always" ],
+    "arrow-body-style": [ "error", "as-needed" ],
     "arrow-parens": "error",
     "arrow-spacing": "error",
     "no-var": "error",

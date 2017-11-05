@@ -26,12 +26,14 @@ class RealTimeMessageManager extends EventEmitter {
     ////////////////////////////////////////////////////////
     // Event callbacks
     onAuthenticated(rtmStartData) {
-        console.log(rtmStartData);
-        this.bot.id = rtmStartData.self.id;
-        this.bot.name = rtmStartData.self.name;
+        console.debug(rtmStartData);
+        this.bot = rtmStartData.self;
+        this.users = rtmStartData.users;
+        this.groups = rtmStartData.groups;
+        this.channels = rtmStartData.channels;
+        this.instantMessages = rtmStartData.ims;
 
         console.log(`${this.bot.name}: Logged in!`);
-        this.emit('authenticated', this.bot);
     }
 
     onConnected() {
@@ -50,6 +52,22 @@ class RealTimeMessageManager extends EventEmitter {
                 else {
                     this.emit('message', data);
                 }
+                break;
+
+            case 'channel_joined':
+                console.log('TODO: Handle channel_joined event');
+                break;
+
+            case 'channel_left':
+                console.log('TODO: Handle channel_left event');
+                break;
+
+            case 'member_joined_channel':
+                this.emit('member_joined_channel', data);
+                break;
+
+            case 'desktop_notification':
+                console.log('TODO: Handle desktop_notification event');
                 break;
 
             default:
