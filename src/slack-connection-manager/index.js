@@ -6,35 +6,64 @@ const rtm = new SlackClient.RtmClient(botToken);
 const web = new SlackClient.WebClient(botToken);
 const clientEvents = SlackClient.CLIENT_EVENTS.RTM;
 
-// Data about the bot.
-const bot = {};
+class SlackConnectionManager {
+    constructor() {
+        if (!SlackConnectionManager._instance) {
+            // Data about the bot.
+            this.bot = {};
 
-///////////////////////////////////////////////////////////
-// Event callbacks
-function onAuthenticated(rtmStartData) {
-    bot.name = rtmStartData.self.name;
+            ///////////////////////////////////////////////////////////
+            // Subscribe and connect.
+            rtm.on(clientEvents.AUTHENTICATED, this.onAuthenticated.bind(this));
+            rtm.on(clientEvents.RTM_CONNECTION_OPENED, this.onConnected.bind(this));
+            rtm.on(clientEvents.RAW_MESSAGE, this.onMessage.bind(this));
 
-    console.log(`${bot.name}: Logged in!`);
+            SlackConnectionManager._instance = this;
+        }
+
+        return SlackConnectionManager._instance;
+    }
+
+    start() {
+        rtm.start();
+    }
+
+    ///////////////////////////////////////////////////////////
+    // Event callbacks
+    onAuthenticated(rtmStartData) {
+        console.log(rtmStartData);
+        this.bot.id = rtmStartData.self.id;
+        this.bot.name = rtmStartData.self.name;
+
+        console.log(`${this.bot.name}: Logged in!`);
+    }
+
+    onConnected() {
+        console.log(`${this.bot.name}: Connected!`);
+    }
+
+    onMessage(rtmData) {
+        const data = JSON.parse(rtmData);
+
+        switch (data.type) {
+            case 'message':
+                console.log(data);
+                break;
+
+            default:
+                console.debug(`SlackConnectionManager/onMessage ~ Unchecked Message Type: '${data.type}'`, data);
+                // falls through
+            case 'hello':
+            case 'pong':
+            case 'reconnect_url':
+            case 'user_typing':
+                // Do not care about these events at the moment.
+                break;
+        }
+    }
 }
 
-function onConnected() {
-    console.log(`${bot.name}: Connected!`);
-}
+const instance = new SlackConnectionManager();
+Object.freeze(instance);
 
-function onMessage(rtmData) {
-    const data = JSON.parse(rtmData);
-
-    console.log(data);
-}
-
-///////////////////////////////////////////////////////////
-// Subscribe and connect.
-rtm.on(clientEvents.AUTHENTICATED, onAuthenticated);
-rtm.on(clientEvents.RTM_CONNECTION_OPENED, onConnected);
-rtm.on(clientEvents.RAW_MESSAGE, onMessage);
-rtm.start();
-
-module.exports = {
-    rtm,
-    web
-};
+module.exports = instance;
