@@ -17,18 +17,10 @@ if (environmentLoaded.error) {
     process.exit(error.errno);
 }
 
+///////////////////////////////////////////////////////////
+// Slack connectivity
 const slackConnectionManager = require('./src/slack-connection-manager/index.js');
 slackConnectionManager.start();
 
-const getTrainData = require('./src/train-time-notifier/train-data-crawler.js');
-getTrainData((err, results) => {
-    if (err) {
-        return console.log(err);
-    }
-
-    const times = results.slice(0, 5).map((o) => {
-        return `${o.time}\t${o.platform}`;
-    });
-
-    console.log(`Train\tPlatform\n${times.join('\n')}`);
-});
+// Respond to train requests.
+require('./src/train-time-notifier');
