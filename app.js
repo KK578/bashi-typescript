@@ -19,19 +19,11 @@ if (environmentLoaded.error) {
 
 ///////////////////////////////////////////////////////////
 // Slack connectivity
-const slackConnectionManager = require('./src/slack-connection-manager/index.js');
+const slackConnectionManager = require('./src/slack-connection-manager');
 slackConnectionManager.start();
 
+// Conversation
+require('./src/conversation');
 // Respond to train requests.
 require('./src/train-time-notifier');
 
-slackConnectionManager.subscribeToRtm('message', (data) => {
-    const channel = data.channel;
-
-    if (slackConnectionManager.isPrivateMessage(channel)) {
-        slackConnectionManager.sendMessage({
-            channel,
-            text: `You want to talk to Bashi?!\nBashi heard you say _'${data.text}'_.`
-        });
-    }
-});

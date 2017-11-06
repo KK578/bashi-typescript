@@ -1,5 +1,5 @@
 const getTrainData = require('./train-data-crawler.js');
-const slackConnectionManager = require('../slack-connection-manager/index.js');
+const slackConnectionManager = require('../slack-connection-manager');
 
 slackConnectionManager.subscribeToRtm('message', (data) => {
     if (data.text.toLowerCase() === 'train') {
@@ -14,8 +14,9 @@ slackConnectionManager.subscribeToRtm('message', (data) => {
             }
 
             const times = results.slice(0, 5)
-                                 .map((o) => `${o.time}\t${o.platform}`);
-            const text = `*Train*\t*Platform*\n${times.join('\n')}`;
+                                 .map((o) => `${o.time}\t${o.platform}`)
+                                 .join('\n');
+            const text = `*Train*\t*Platform*\n${times}`;
 
             slackConnectionManager.sendMessage({
                 channel: data.channel,
