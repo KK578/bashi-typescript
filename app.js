@@ -25,15 +25,6 @@ slackConnectionManager.start();
 // Respond to train requests.
 require('./src/train-time-notifier');
 
-slackConnectionManager.subscribeToRtm('member_joined_channel', (data) => {
-    const user = slackConnectionManager.getUserFromId(data.user);
-
-    slackConnectionManager.sendMessage({
-        channel: data.channel,
-        text: `Is there a newbie, bashou?!\nHlo ${user.real_name}!`
-    });
-});
-
 slackConnectionManager.subscribeToRtm('message', (data) => {
     const channel = data.channel;
 
