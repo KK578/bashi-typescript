@@ -49,6 +49,9 @@ class RealTimeMessageManager extends EventEmitter {
                 if (data.subtype === 'bot_message') {
                     this.emit('bot_message', data);
                 }
+                else if (data.subtype === 'message_deleted') {
+                    this.emit('message_deleted', data);
+                }
                 else {
                     this.emit('message', data);
                 }
