@@ -9,6 +9,9 @@
     "type": "git",
     "url": "https://github.com/KK578/bashi"
   },
+  "scripts": {
+    "postinstall": "bash scripts/postinstall.sh"
+  },
   "license": "BSD-3-Clause",
   "dependencies": {
     "@slack/client": "^3.14.1",
