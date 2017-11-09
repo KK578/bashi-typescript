@@ -1,5 +1,8 @@
 #!/bin/bash
 COMMIT_MESSAGE=$1
+if [[ $COMMIT_MESSAGE == ".git/"* ]]; then
+    COMMIT_MESSAGE=$(head -n 1 $COMMIT_MESSAGE)
+fi
 
 CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 GITHUB_NUMBER=$(echo $CURRENT_BRANCH | egrep -o '#[0-9]*')
