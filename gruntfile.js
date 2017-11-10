@@ -8,7 +8,7 @@ module.exports = function (grunt) {
         const newConfig = { [key]: configs[key].config };
 
         return Object.assign(combinedConfigs, newConfig);
-    });
+    }, {});
     const npmTasks = Object.keys(configs).map((key) => configs[key].name);
 
     grunt.initConfig(gruntConfigs);
