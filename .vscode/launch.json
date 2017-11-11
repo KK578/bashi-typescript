@@ -5,7 +5,7 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Bashi",
-      "program": "${workspaceFolder}/app.js"
+      "program": "${workspaceFolder}/build/app.js"
     }
   ]
 }

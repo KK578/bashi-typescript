@@ -29,18 +29,6 @@
                 ]
             }
         ],
-        "typedef": [
-            "error",
-            "call-signature",
-            "arrow-call-signature",
-            "parameter",
-            "arrow-parameter",
-            "property-declaration",
-            "variable-declaration",
-            "member-variable-declaration",
-            "object-destructuring",
-            "array-destructuring"
-        ],
         "typedef-whitespace": [
             "error",
             {

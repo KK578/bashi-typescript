@@ -1,11 +1,15 @@
 import * as dotenv from "dotenv";
 // import * as SlackConnectionManager from "./slack-connection-manager";
+import { ISlackConnectionManager } from "./interfaces/slack-connection-manager/ISlackConnectionManager";
 
-///////////////////////////////////////////////////////////
-// Environment variable checks
-class App {
+export class App {
     // slackConnectionManager : ISlackConnectionManager
     // slackConnectionListeners : [ISlackConnectionListeners]
+
+    public constructor(scm: ISlackConnectionManager) {
+        // TODO
+        scm.start();
+    }
 
     public start() {
         this.ensureEnvironmentLoaded();
@@ -34,8 +38,6 @@ class App {
     }
 }
 
-const app = new App();
-app.start();
 // Conversation
 // require("./src/conversation");
 // Respond to train requests.
