@@ -1,10 +1,10 @@
-const request = require('request');
-const cheerio = require('cheerio');
+const request = require("request");
+const cheerio = require("cheerio");
 
 const url = process.env.TRAIN_URL;
 
 function trimWhitespace(text) {
-    return text.replace(/^\s*(.*?)\s*$/m, '$1');
+    return text.replace(/^\s*(.*?)\s*$/m, "$1");
 }
 
 function getTrainData(callback) {
@@ -14,7 +14,7 @@ function getTrainData(callback) {
         }
 
         if (res.statusCode !== 200) {
-            return callback(new Error('Bad response', res));
+            return callback(new Error("Bad response", res));
         }
 
         const results = [];
@@ -23,11 +23,11 @@ function getTrainData(callback) {
         });
 
         // Train times are <li> inside of a <div#timetableWrapper>
-        $('.row.origin').each((i, element) => {
+        $(".row.origin").each((i, element) => {
             const $$ = $(element);
 
-            const time = $$.find('time').text();
-            const platform = $$.find('.times-platform').text();
+            const time = $$.find("time").text();
+            const platform = $$.find(".times-platform").text();
 
             const o = {
                 time: trimWhitespace(time),

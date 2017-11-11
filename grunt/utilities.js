@@ -1,4 +1,4 @@
-const timeGrunt = require('time-grunt');
+const timeGrunt = require("time-grunt");
 
 function quietGruntNewer(grunt) {
     const originalHeader = grunt.log.header;
@@ -17,7 +17,7 @@ function quietGruntNewer(grunt) {
     // Cannot use arrow functions here as the this object is incorrect otherwise.
     grunt.log.writeln = function (message) {
         // Only write the message if it is not the text from a grunt-newer task.
-        if (message !== 'No newer files to process.') {
+        if (message !== "No newer files to process.") {
             originalWriteLn.apply(this, arguments);
         }
 

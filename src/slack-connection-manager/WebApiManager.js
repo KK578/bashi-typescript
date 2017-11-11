@@ -1,4 +1,4 @@
-const SlackClient = require('@slack/client');
+const SlackClient = require("@slack/client");
 let web;
 
 class WebApiManager {

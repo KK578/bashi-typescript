@@ -1,51 +1,42 @@
-import * as dotenv from 'dotenv';
-import { DotenvResult } from 'dotenv';
-import * as SlackConnectionManager from './slack-connection-manager';
+import * as dotenv from "dotenv";
+// import * as SlackConnectionManager from "./slack-connection-manager";
 
 ///////////////////////////////////////////////////////////
 // Environment variable checks
 class App {
-    slackConnectionManager : ISlackConnectionManager
-    slackConnectionListeners : [ISlackConnectionListeners]
+    // slackConnectionManager : ISlackConnectionManager
+    // slackConnectionListeners : [ISlackConnectionListeners]
 
-    constructor() {
-        // C Style exit code.
-        this.checkEnvironmentLoaded();
+    public start() {
+        this.ensureEnvironmentLoaded();
         this.startSlackManager();
         this.subscribeSlackListeners();
     }
 
-    private checkEnvironmentLoaded() : object {
-        const envLoaded:DotenvResult = dotenv.config();
+    private ensureEnvironmentLoaded(): void {
+        const envLoaded: dotenv.DotenvResult = dotenv.config();
+        const error: Error = envLoaded.error;
 
-        if (envLoaded.error) {
-            const error = envLoaded.error;
-
-            switch (error.code) {
-                case 'ENOENT':
-                    console.error('No .env file was found.');
-                    process.exit(2);
-                    break;
-
-                default:
-                    console.error(error.message);
-                    process.exit(1);
-                    break;
-            }
-
-            return { error };
+        if (error !== undefined) {
+            console.error(error.message);
+            process.exit(1);
         }
-
-        return {};
     }
 
-    private startConnectionManager() {
-        this.slackConnectionManager = new SlackConnectionManager();
-        this.slackConnectionManager.start();
+    private startSlackManager(): void {
+        // this.slackConnectionManager = new SlackConnectionManager();
+        // this.slackConnectionManager.start();
+        throw new Error("Method not implemented.");
+    }
+
+    private subscribeSlackListeners(): void {
+        throw new Error("Method not implemented.");
     }
 }
 
+const app = new App();
+app.start();
 // Conversation
-// require('./src/conversation');
+// require("./src/conversation");
 // Respond to train requests.
-// require('./src/train-time-notifier');
+// require("./src/train-time-notifier");

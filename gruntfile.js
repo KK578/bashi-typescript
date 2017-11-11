@@ -1,7 +1,7 @@
-const utilities = require('./grunt/utilities');
-const configs = require('./grunt/configs');
+const utilities = require("./grunt/utilities");
+const configs = require("./grunt/configs");
 
-const customTasks = require('./grunt/aliases');
+const customTasks = require("./grunt/aliases");
 
 module.exports = function (grunt) {
     const gruntConfigs = Object.keys(configs).reduce((combinedConfigs, key) => {

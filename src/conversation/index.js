@@ -1,6 +1,6 @@
-const slackConnectionManager = require('../slack-connection-manager');
+const slackConnectionManager = require("../slack-connection-manager");
 
-slackConnectionManager.subscribeToRtm('message', (data) => {
+slackConnectionManager.subscribeToRtm("message", (data) => {
     const channel = data.channel;
 
     if (slackConnectionManager.isPrivateMessage(channel)) {

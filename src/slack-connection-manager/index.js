@@ -2,8 +2,8 @@ const botToken = process.env.SLACK_BOT_TOKEN;
 
 ////////////////////////////////////////////////////////////
 // API Managers
-const RealTimeMessageManager = require('./RealTimeMessageManager.js');
-const WebApiManager = require('./WebApiManager.js');
+const RealTimeMessageManager = require("./RealTimeMessageManager.js");
+const WebApiManager = require("./WebApiManager.js");
 let rtm;
 let web;
 

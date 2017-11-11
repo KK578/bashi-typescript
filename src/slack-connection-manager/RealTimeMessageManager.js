@@ -1,6 +1,6 @@
 // Slack APIs
-const EventEmitter = require('events');
-const SlackClient = require('@slack/client');
+const EventEmitter = require("events");
+const SlackClient = require("@slack/client");
 const clientEvents = SlackClient.CLIENT_EVENTS.RTM;
 let rtm;
 
@@ -44,42 +44,42 @@ class RealTimeMessageManager extends EventEmitter {
         const data = JSON.parse(rtmData);
 
         switch (data.type) {
-            case 'message':
+            case "message":
                 console.log(data);
-                if (data.subtype === 'bot_message') {
-                    this.emit('bot_message', data);
+                if (data.subtype === "bot_message") {
+                    this.emit("bot_message", data);
                 }
-                else if (data.subtype === 'message_deleted') {
-                    this.emit('message_deleted', data);
+                else if (data.subtype === "message_deleted") {
+                    this.emit("message_deleted", data);
                 }
                 else {
-                    this.emit('message', data);
+                    this.emit("message", data);
                 }
                 break;
 
-            case 'channel_joined':
-                console.log('TODO: Handle channel_joined event');
+            case "channel_joined":
+                console.log("TODO: Handle channel_joined event");
                 break;
 
-            case 'channel_left':
-                console.log('TODO: Handle channel_left event');
+            case "channel_left":
+                console.log("TODO: Handle channel_left event");
                 break;
 
-            case 'member_joined_channel':
-                this.emit('member_joined_channel', data);
+            case "member_joined_channel":
+                this.emit("member_joined_channel", data);
                 break;
 
-            case 'desktop_notification':
-                console.log('TODO: Handle desktop_notification event');
+            case "desktop_notification":
+                console.log("TODO: Handle desktop_notification event");
                 break;
 
             default:
                 console.debug(`SlackConnectionManager/onMessage ~ Unchecked Message Type: '${data.type}'`, data);
                 // falls through
-            case 'hello':
-            case 'pong':
-            case 'reconnect_url':
-            case 'user_typing':
+            case "hello":
+            case "pong":
+            case "reconnect_url":
+            case "user_typing":
                 // Do not care about these events at the moment.
                 break;
         }
