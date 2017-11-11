@@ -24,7 +24,10 @@ module.exports = {
         files: [
             {
                 expand: true,
-                src: ["src/**/*.ts"]
+                src: [
+                    "src/**/*.ts",
+                    "!src/interfaces/**/*.ts"
+                ]
             }
         ]
     }
