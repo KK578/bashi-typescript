@@ -1,40 +1,25 @@
-import * as dotenv from "dotenv";
-// import * as SlackConnectionManager from "./slack-connection-manager";
 import { ISlackConnectionManager } from "./interfaces/slack-connection-manager/ISlackConnectionManager";
 
 export class App {
-    // slackConnectionManager : ISlackConnectionManager
+    scm: ISlackConnectionManager;
     // slackConnectionListeners : [ISlackConnectionListeners]
 
     public constructor(scm: ISlackConnectionManager) {
         // TODO
-        scm.start();
+        this.scm = scm;
     }
 
     public start() {
-        this.ensureEnvironmentLoaded();
         this.startSlackManager();
         this.subscribeSlackListeners();
     }
 
-    private ensureEnvironmentLoaded(): void {
-        const envLoaded: dotenv.DotenvResult = dotenv.config();
-        const error: Error = envLoaded.error;
-
-        if (error !== undefined) {
-            console.error(error.message);
-            process.exit(1);
-        }
-    }
-
     private startSlackManager(): void {
-        // this.slackConnectionManager = new SlackConnectionManager();
-        // this.slackConnectionManager.start();
-        throw new Error("Method not implemented.");
+        this.scm.start();
     }
 
     private subscribeSlackListeners(): void {
-        throw new Error("Method not implemented.");
+        // throw new Error("Method not implemented.");
     }
 }
 

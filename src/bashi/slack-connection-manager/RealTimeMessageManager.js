@@ -1,6 +1,7 @@
 // Slack APIs
 const EventEmitter = require("events");
 const SlackClient = require("@slack/client");
+
 const clientEvents = SlackClient.CLIENT_EVENTS.RTM;
 let rtm;
 
