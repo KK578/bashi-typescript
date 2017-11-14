@@ -3,6 +3,7 @@ import * as dotenv from "dotenv";
 
 import { RtmConnectionManager } from "./bashi/slack-connection-manager/RtmConnectionManager";
 import { SlackConnectionManager } from "./bashi/slack-connection-manager/SlackConnectionManager";
+import { SlackRtmClient } from "./bashi/slack-connection-manager/SlackRtmClient";
 
 const envLoaded: dotenv.DotenvResult = dotenv.config();
 const error: Error = envLoaded.error;
@@ -13,8 +14,9 @@ if (error !== undefined) {
 }
 
 const botToken: string = process.env.SLACK_BOT_TOKEN;
-const rtm = new RtmConnectionManager(botToken);
-const scm = new SlackConnectionManager(botToken, rtm);
+const rtm = new SlackRtmClient(botToken);
+const rtmManager = new RtmConnectionManager(rtm);
+const scm = new SlackConnectionManager(rtmManager);
 const app = new App(scm);
 
 app.start();

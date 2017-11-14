@@ -4,7 +4,7 @@ import { ISlackConnectionManager } from "../../interfaces/slack-connection-manag
 export class SlackConnectionManager implements ISlackConnectionManager {
     private rtm: IRtmConnectionManager;
 
-    constructor(botToken: string, rtm: IRtmConnectionManager) {
+    constructor(rtm: IRtmConnectionManager) {
         this.rtm = rtm;
     }
 

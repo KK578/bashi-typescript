@@ -1,20 +1,22 @@
 import { CLIENT_EVENTS, RtmClient } from "@slack/client";
 import { IRtmConnectionManager } from "../../interfaces/slack-connection-manager/IRtmConnectionManager";
-
-let rtm: RtmClient;
+import * as Slack from "../../interfaces/node-slack-sdk";
+import { BaseRtmClient } from "./BaseRtmClient";
 
 export class RtmConnectionManager implements IRtmConnectionManager {
-    public bot: { name: string; };
-    public users: {};
-    public groups: {};
-    public channels: {};
-    public instantMessages: {};
+    public bot: Slack.IBotUser;
+    public users: [Slack.IUser];
+    public groups: [Slack.IGroup];
+    public channels: [Slack.IChannel];
+    public instantMessages: [Slack.IInstantMessage];
 
-    public constructor(token: string) {
-        rtm = new RtmClient(token);
+    private rtm: BaseRtmClient;
 
-        rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, this.onAuthenticated.bind(this));
-        rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, this.onConnected.bind(this));
+    public constructor(rtm: BaseRtmClient) {
+        this.rtm = rtm;
+
+        this.rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, this.onAuthenticated.bind(this));
+        this.rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, this.onConnected.bind(this));
     }
 
     private onAuthenticated(data) {
@@ -32,7 +34,7 @@ export class RtmConnectionManager implements IRtmConnectionManager {
     }
 
     public start(): void {
-        rtm.start();
+        this.rtm.start();
     }
 
     public stop(): void {
