@@ -1,7 +1,7 @@
 import { ISlackConnectionManager } from "./interfaces/slack-connection-manager/ISlackConnectionManager";
 
 export class App {
-    scm: ISlackConnectionManager;
+    private scm: ISlackConnectionManager;
     // slackConnectionListeners : [ISlackConnectionListeners]
 
     public constructor(scm: ISlackConnectionManager) {

@@ -1,9 +1,7 @@
-import { App } from "./app";
 import * as dotenv from "dotenv";
 
-import { RtmConnectionManager } from "./bashi/slack-connection-manager/RtmConnectionManager";
-import { SlackConnectionManager } from "./bashi/slack-connection-manager/SlackConnectionManager";
-import { SlackRtmClient } from "./bashi/slack-connection-manager/SlackRtmClient";
+import { App } from "./app";
+import { BashiFactory } from "./factory/bashi-factory";
 
 const envLoaded: dotenv.DotenvResult = dotenv.config();
 const error: Error = envLoaded.error;
@@ -14,9 +12,7 @@ if (error !== undefined) {
 }
 
 const botToken: string = process.env.SLACK_BOT_TOKEN;
-const rtm = new SlackRtmClient(botToken);
-const rtmManager = new RtmConnectionManager(rtm);
-const scm = new SlackConnectionManager(rtmManager);
-const app = new App(scm);
+const bashiFactory: BashiFactory = new BashiFactory(botToken);
+const app: App = bashiFactory.createApp();
 
 app.start();

@@ -1,4 +1,3 @@
-import { IRtmClient } from "../../interfaces/slack-connection-manager/IRtmClient";
 import * as Slack from "@slack/client";
 import { BaseRtmClient } from "./BaseRtmClient";
 

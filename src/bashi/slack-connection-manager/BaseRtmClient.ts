@@ -1,8 +1,5 @@
 import { IRtmClient } from "../../interfaces/slack-connection-manager/IRtmClient";
-import * as Slack from "@slack/client";
 import { EventEmitter } from "events";
-
-let rtm: Slack.RtmClient;
 
 export class BaseRtmClient extends EventEmitter {
     protected rtm: IRtmClient;
@@ -13,7 +10,13 @@ export class BaseRtmClient extends EventEmitter {
         this.rtm = rtm;
     }
 
+    on(eventName: string, callback: (...args: any[]) => void): this {
+        this.rtm.on(eventName, callback);
+
+        return this;
+    }
+
     start() {
-        rtm.start();
+        this.rtm.start();
     }
 }
