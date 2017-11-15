@@ -2,39 +2,33 @@ import { CLIENT_EVENTS, RtmClient } from "@slack/client";
 import { IRtmConnectionManager } from "../../interfaces/slack-connection-manager/IRtmConnectionManager";
 import * as Slack from "../../interfaces/node-slack-sdk";
 import { BaseRtmClient } from "./BaseRtmClient";
+import { ISlackDataManager } from "../../interfaces/slack-connection-manager/ISlackDataManager";
 
 export class RtmConnectionManager implements IRtmConnectionManager {
-    public bot: Slack.IBotUser;
-    public users: [Slack.IUser];
-    public groups: [Slack.IGroup];
-    public channels: [Slack.IChannel];
-    public instantMessages: [Slack.IInstantMessage];
+    public slackDataManager: ISlackDataManager;
 
-    private rtm: BaseRtmClient;
+    private rtmClient: BaseRtmClient;
 
-    public constructor(rtm: BaseRtmClient) {
-        this.rtm = rtm;
+    public constructor(rtmClient: BaseRtmClient, slackDataManager: ISlackDataManager) {
+        this.rtmClient = rtmClient;
+        this.slackDataManager = slackDataManager;
 
-        this.rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, this.onAuthenticated.bind(this));
-        this.rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, this.onConnected.bind(this));
+        this.rtmClient.on(CLIENT_EVENTS.RTM.AUTHENTICATED, this.onAuthenticated.bind(this));
+        this.rtmClient.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, this.onConnected.bind(this));
     }
 
     private onAuthenticated(data) {
-        this.bot = data.self;
-        this.users = data.users;
-        this.groups = data.groups;
-        this.channels = data.channels;
-        this.instantMessages = data.ims;
+        this.slackDataManager.setData(data);
 
-        console.log(`${this.bot.name}: Logged in!`);
+        console.log(`${this.slackDataManager.bot.name}: Logged in!`);
     }
 
     private onConnected(data) {
-        console.log(`${this.bot.name}: Connected!`);
+        console.log(`${this.slackDataManager.bot.name}: Connected!`);
     }
 
     public start(): void {
-        this.rtm.start();
+        this.rtmClient.start();
     }
 
     public stop(): void {

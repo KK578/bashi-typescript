@@ -1,12 +1,8 @@
 import * as Slack from "../../interfaces/node-slack-sdk";
+import { ISlackDataManager } from "./ISlackDataManager";
 
 export interface IRtmConnectionManager {
-    // TODO: Create Interface types for these.
-    bot: Slack.IBotUser;
-    users: [Slack.IUser];
-    groups: [Slack.IGroup];
-    channels: [Slack.IChannel];
-    instantMessages: [Slack.IInstantMessage];
+    slackDataManager: ISlackDataManager;
 
     start(): void;
     stop(): void;

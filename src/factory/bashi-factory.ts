@@ -2,6 +2,7 @@ import { App } from "../app";
 import { SlackConnectionManager } from "../bashi/slack-connection-manager/SlackConnectionManager";
 import { SlackRtmClient } from "../bashi/slack-connection-manager/SlackRtmClient";
 import { RtmConnectionManager } from "../bashi/slack-connection-manager/RtmConnectionManager";
+import { SlackDataManager } from "../bashi/slack-connection-manager/SlackDataManager";
 
 import { BaseRtmClient } from "../bashi/slack-connection-manager/BaseRtmClient";
 import { ISlackConnectionManager } from "../interfaces/slack-connection-manager/ISlackConnectionManager";
@@ -15,24 +16,29 @@ export class BashiFactory {
     }
 
     public createApp(): App {
-        const scm = this.createSlackConnectionManager();
+        const slackConnectionManager = this.createSlackConnectionManager();
 
-        return new App(scm);
+        return new App(slackConnectionManager);
     }
 
     public createSlackConnectionManager(): ISlackConnectionManager {
-        const rtm = this.createRtmConnectionManager();
+        const rtmConnectionManager = this.createRtmConnectionManager();
 
-        return new SlackConnectionManager(rtm);
+        return new SlackConnectionManager(rtmConnectionManager);
     }
 
     public createRtmConnectionManager(): IRtmConnectionManager {
         const rtmClient = this.createRtmClient();
+        const slackDataManager = this.createSlackDataManager();
 
-        return new RtmConnectionManager(rtmClient);
+        return new RtmConnectionManager(rtmClient, slackDataManager);
     }
 
     public createRtmClient(): BaseRtmClient {
         return new SlackRtmClient(this.botToken);
+    }
+
+    public createSlackDataManager() {
+        return new SlackDataManager();
     }
 }
