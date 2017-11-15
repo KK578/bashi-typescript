@@ -3,6 +3,7 @@ import { SlackConnectionManager } from "../bashi/slack-connection-manager/SlackC
 import { SlackRtmClient } from "../bashi/slack-connection-manager/SlackRtmClient";
 import { RtmConnectionManager } from "../bashi/slack-connection-manager/RtmConnectionManager";
 import { SlackDataManager } from "../bashi/slack-connection-manager/SlackDataManager";
+import { WebApiManager } from "../bashi/slack-connection-manager/WebApiManager";
 
 import { BaseRtmClient } from "../bashi/slack-connection-manager/BaseRtmClient";
 import { ISlackConnectionManager } from "../interfaces/slack-connection-manager/ISlackConnectionManager";
@@ -23,8 +24,9 @@ export class BashiFactory {
 
     public createSlackConnectionManager(): ISlackConnectionManager {
         const rtmConnectionManager = this.createRtmConnectionManager();
+        const webApiManager = this.createWebApiManager();
 
-        return new SlackConnectionManager(rtmConnectionManager);
+        return new SlackConnectionManager(rtmConnectionManager, webApiManager);
     }
 
     public createRtmConnectionManager(): IRtmConnectionManager {
@@ -40,5 +42,9 @@ export class BashiFactory {
 
     public createSlackDataManager() {
         return new SlackDataManager();
+    }
+
+    public createWebApiManager() {
+        return new WebApiManager(this.botToken);
     }
 }
