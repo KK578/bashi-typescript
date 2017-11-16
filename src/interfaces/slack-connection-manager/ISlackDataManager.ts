@@ -1,11 +1,11 @@
-import * as Slack from "../node-slack-sdk";
+import { BotUserResult, FullChannelResult, FullUserResult } from "@slack/client";
 
 export interface ISlackDataManager {
-    bot: Slack.IBotUser;
-    users: [Slack.IUser];
-    groups: [Slack.IGroup];
-    channels: [Slack.IChannel];
-    instantMessages: [Slack.IInstantMessage];
+    bot: BotUserResult;
+    users: FullUserResult[];
+    groups: FullChannelResult[];
+    channels: FullChannelResult[];
+    instantMessages: FullChannelResult[];
 
     setData(data): void;
 }

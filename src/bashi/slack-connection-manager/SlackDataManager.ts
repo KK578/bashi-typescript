@@ -1,14 +1,14 @@
-import * as Slack from "../../interfaces/node-slack-sdk";
+import { BotUserResult, FullChannelResult, FullUserResult, GroupsInfoResult, RtmStartResult } from "@slack/client";
 import { ISlackDataManager } from "../../interfaces/slack-connection-manager/ISlackDataManager";
 
 export class SlackDataManager implements ISlackDataManager {
-    public bot: Slack.IBotUser;
-    public users: [Slack.IUser];
-    public groups: [Slack.IGroup];
-    public channels: [Slack.IChannel];
-    public instantMessages: [Slack.IInstantMessage];
+    public bot: BotUserResult;
+    public users: FullUserResult[];
+    public groups: FullChannelResult[];
+    public channels: FullChannelResult[];
+    public instantMessages: FullChannelResult[];
 
-    setData(data) {
+    public setData(data: RtmStartResult) {
         this.bot = data.self;
         this.users = data.users;
         this.groups = data.groups;

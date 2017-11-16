@@ -1,12 +1,12 @@
 import { ISlackConnectionManager } from "./interfaces/slack-connection-manager/ISlackConnectionManager";
 
 export class App {
-    private scm: ISlackConnectionManager;
+    private slackConnectionManager: ISlackConnectionManager;
     // slackConnectionListeners : [ISlackConnectionListeners]
 
-    public constructor(scm: ISlackConnectionManager) {
+    public constructor(slackConnectionManager: ISlackConnectionManager) {
         // TODO
-        this.scm = scm;
+        this.slackConnectionManager = slackConnectionManager;
     }
 
     public start() {
@@ -15,7 +15,7 @@ export class App {
     }
 
     private startSlackManager(): void {
-        this.scm.start();
+        this.slackConnectionManager.start();
     }
 
     private subscribeSlackListeners(): void {

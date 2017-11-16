@@ -1259,7 +1259,7 @@ declare module '@slack/client' {
         }
         users: FullUserResult[];
         channels: FullChannelResult[];
-        groups: GroupsInfoResult;
+        groups: FullChannelResult[];
         mpims: any;
         ims: FullChannelResult[];
         bots: any;

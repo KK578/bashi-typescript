@@ -1,22 +1,22 @@
-import { IRtmClient } from "../../interfaces/node-slack-sdk/IRtmClient";
 import { EventEmitter } from "events";
+import { IRtmClient } from "../../interfaces/node-slack-sdk/IRtmClient";
 
 export class BaseRtmClient extends EventEmitter {
-    protected rtm: IRtmClient;
+    protected rtmClient: IRtmClient;
 
-    constructor(rtm: IRtmClient) {
+    constructor(rtmClient: IRtmClient) {
         super();
 
-        this.rtm = rtm;
+        this.rtmClient = rtmClient;
     }
 
-    on(eventName: string, callback: (...args: any[]) => void): this {
-        this.rtm.on(eventName, callback);
+    public on(eventName: string, callback: (...args: any[]) => void): this {
+        this.rtmClient.on(eventName, callback);
 
         return this;
     }
 
-    start() {
-        this.rtm.start();
+    public start() {
+        this.rtmClient.start();
     }
 }

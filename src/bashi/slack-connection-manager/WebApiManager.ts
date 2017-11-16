@@ -10,7 +10,7 @@ export class WebApiManager implements IWebApiManager {
 
     ///////////////////////////////////////////////////////////
     // WebApiManager
-    sendMessage(message) {
+    public sendMessage(message) {
         this.webApi.chat.postMessage(message.channel, message.text, message);
     }
 }
