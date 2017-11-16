@@ -4,4 +4,4 @@ export { IWebClient } from "./node-slack-sdk/IWebClient";
 export { IRtmConnectionManager } from "./slack-connection-manager/IRtmConnectionManager";
 export { ISlackConnectionManager } from "./slack-connection-manager/ISlackConnectionManager";
 export { ISlackDataManager } from "./slack-connection-manager/ISlackDataManager";
-export { IWebApiManager } from "./slack-connection-manager/IWebApiManager";
+export { IWebClientManager } from "./slack-connection-manager/IWebClientManager";

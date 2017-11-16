@@ -1,7 +1,7 @@
 import { App } from "../app";
-import { RtmConnectionManager, SlackConnectionManager, SlackDataManager, WebApiManager } from "../bashi";
+import { RtmConnectionManager, SlackConnectionManager, SlackDataManager, WebClientManager } from "../bashi";
 
-import { BaseRtmClient, SlackRtmClient } from "../bashi";
+import { BaseRtmClient, BaseWebClient, SlackRtmClient, SlackWebClient } from "../bashi";
 
 import { IRtmConnectionManager, ISlackConnectionManager } from "../interfaces";
 
@@ -20,9 +20,9 @@ export class BashiFactory {
 
     public createSlackConnectionManager(): ISlackConnectionManager {
         const rtmConnectionManager = this.createRtmConnectionManager();
-        const webApiManager = this.createWebApiManager();
+        const webClientManager = this.createWebClientManager();
 
-        return new SlackConnectionManager(rtmConnectionManager, webApiManager);
+        return new SlackConnectionManager(rtmConnectionManager, webClientManager);
     }
 
     public createRtmConnectionManager(): IRtmConnectionManager {
@@ -40,7 +40,13 @@ export class BashiFactory {
         return new SlackDataManager();
     }
 
-    public createWebApiManager() {
-        return new WebApiManager(this.botToken);
+    public createWebClientManager() {
+        const webClient = this.createWebClient();
+
+        return new WebClientManager(webClient);
+    }
+
+    public createWebClient(): BaseWebClient {
+        return new SlackWebClient(this.botToken);
     }
 }

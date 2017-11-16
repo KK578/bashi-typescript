@@ -1,12 +1,12 @@
-import { IRtmConnectionManager, ISlackConnectionManager, IWebApiManager } from "../../interfaces";
+import { IRtmConnectionManager, ISlackConnectionManager, IWebClientManager } from "../../interfaces";
 
 export class SlackConnectionManager implements ISlackConnectionManager {
     private rtmConnectionManager: IRtmConnectionManager;
-    private webApiManager: IWebApiManager;
+    private webClientManager: IWebClientManager;
 
-    constructor(rtmConnectionManager: IRtmConnectionManager, webApiManager: IWebApiManager) {
+    constructor(rtmConnectionManager: IRtmConnectionManager, webClientManager: IWebClientManager) {
         this.rtmConnectionManager = rtmConnectionManager;
-        this.webApiManager = webApiManager;
+        this.webClientManager = webClientManager;
     }
 
     public start(): void {
