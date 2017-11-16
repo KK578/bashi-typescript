@@ -1,7 +1,7 @@
 import { CLIENT_EVENTS, RtmClient } from "@slack/client";
 import { IRtmConnectionManager } from "../../interfaces/slack-connection-manager/IRtmConnectionManager";
 import * as Slack from "../../interfaces/node-slack-sdk";
-import { BaseRtmClient } from "./BaseRtmClient";
+import { BaseRtmClient } from "../node-slack-sdk/BaseRtmClient";
 import { ISlackDataManager } from "../../interfaces/slack-connection-manager/ISlackDataManager";
 
 export class RtmConnectionManager implements IRtmConnectionManager {

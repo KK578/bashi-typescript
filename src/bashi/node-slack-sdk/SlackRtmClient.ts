@@ -1,13 +1,11 @@
-import * as Slack from "@slack/client";
+import { RtmClient } from "@slack/client";
 import { BaseRtmClient } from "./BaseRtmClient";
 
-let rtm: Slack.RtmClient;
-
 export class SlackRtmClient extends BaseRtmClient {
-    protected rtm: Slack.RtmClient;
+    protected rtm: RtmClient;
 
     constructor(botToken: string) {
-        const rtm = new Slack.RtmClient(botToken);
+        const rtm = new RtmClient(botToken);
         super(rtm);
 
         this.rtm = rtm;

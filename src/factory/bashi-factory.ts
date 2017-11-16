@@ -1,11 +1,11 @@
 import { App } from "../app";
 import { SlackConnectionManager } from "../bashi/slack-connection-manager/SlackConnectionManager";
-import { SlackRtmClient } from "../bashi/slack-connection-manager/SlackRtmClient";
+import { SlackRtmClient } from "../bashi/node-slack-sdk/SlackRtmClient";
 import { RtmConnectionManager } from "../bashi/slack-connection-manager/RtmConnectionManager";
 import { SlackDataManager } from "../bashi/slack-connection-manager/SlackDataManager";
 import { WebApiManager } from "../bashi/slack-connection-manager/WebApiManager";
 
-import { BaseRtmClient } from "../bashi/slack-connection-manager/BaseRtmClient";
+import { BaseRtmClient } from "../bashi/node-slack-sdk/BaseRtmClient";
 import { ISlackConnectionManager } from "../interfaces/slack-connection-manager/ISlackConnectionManager";
 import { IRtmConnectionManager } from "../interfaces/slack-connection-manager/IRtmConnectionManager";
 
