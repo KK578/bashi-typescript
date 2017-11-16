@@ -4,6 +4,8 @@
         "no-console": {
             "severity": "off"
         },
+        "trailing-comma": false,
+        "eofline": true,
 
         // TypeScript
         "member-access": "error",
@@ -45,6 +47,7 @@
                 "property-declaration": "onespace",
                 "variable-declaration": "onespace"
             }
-        ]
+        ],
+        "type-literal-delimiter": true
     }
 }
