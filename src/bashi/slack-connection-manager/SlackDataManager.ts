@@ -1,5 +1,5 @@
 import { BotUserResult, FullChannelResult, FullUserResult, GroupsInfoResult, RtmStartResult } from "@slack/client";
-import { ISlackDataManager } from "../../interfaces/slack-connection-manager/ISlackDataManager";
+import { ISlackDataManager } from "../../interfaces";
 
 export class SlackDataManager implements ISlackDataManager {
     public bot: BotUserResult;

@@ -1,5 +1,5 @@
 import { WebClient } from "@slack/client";
-import { IWebApiManager } from "../../interfaces/slack-connection-manager/IWebApiManager";
+import { IWebApiManager } from "../../interfaces";
 
 export class WebApiManager implements IWebApiManager {
     private webApi: WebClient;

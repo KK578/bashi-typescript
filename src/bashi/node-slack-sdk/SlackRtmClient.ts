@@ -1,5 +1,5 @@
 import { RtmClient } from "@slack/client";
-import { BaseRtmClient } from "./BaseRtmClient";
+import { BaseRtmClient } from "../";
 
 export class SlackRtmClient extends BaseRtmClient {
     protected rtmClient: RtmClient;

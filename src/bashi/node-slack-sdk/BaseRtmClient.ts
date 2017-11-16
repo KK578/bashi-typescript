@@ -1,5 +1,5 @@
 import { EventEmitter } from "events";
-import { IRtmClient } from "../../interfaces/node-slack-sdk/IRtmClient";
+import { IRtmClient } from "../../interfaces";
 
 export class BaseRtmClient extends EventEmitter {
     protected rtmClient: IRtmClient;

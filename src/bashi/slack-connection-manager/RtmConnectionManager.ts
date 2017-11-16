@@ -1,7 +1,6 @@
 import { CLIENT_EVENTS } from "@slack/client";
-import { IRtmConnectionManager } from "../../interfaces/slack-connection-manager/IRtmConnectionManager";
-import { ISlackDataManager } from "../../interfaces/slack-connection-manager/ISlackDataManager";
-import { BaseRtmClient } from "../node-slack-sdk/BaseRtmClient";
+import { BaseRtmClient } from "../";
+import { IRtmConnectionManager, ISlackDataManager } from "../../interfaces";
 
 export class RtmConnectionManager implements IRtmConnectionManager {
     public slackDataManager: ISlackDataManager;

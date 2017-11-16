@@ -1,5 +1,5 @@
 import { WebClient } from "@slack/client";
-import { BaseWebClient } from "./BaseWebClient";
+import { BaseWebClient } from "../";
 
 export class SlackWebClient extends BaseWebClient {
     protected webClient: WebClient;

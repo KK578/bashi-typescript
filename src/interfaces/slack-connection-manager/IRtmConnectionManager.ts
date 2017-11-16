@@ -1,4 +1,4 @@
-import { ISlackDataManager } from "./ISlackDataManager";
+import { ISlackDataManager } from "../";
 
 export interface IRtmConnectionManager {
     slackDataManager: ISlackDataManager;

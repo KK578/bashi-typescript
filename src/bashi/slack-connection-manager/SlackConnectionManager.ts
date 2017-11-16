@@ -1,6 +1,4 @@
-import { IRtmConnectionManager } from "../../interfaces/slack-connection-manager/IRtmConnectionManager";
-import { ISlackConnectionManager } from "../../interfaces/slack-connection-manager/ISlackConnectionManager";
-import { IWebApiManager } from "../../interfaces/slack-connection-manager/IWebApiManager";
+import { IRtmConnectionManager, ISlackConnectionManager, IWebApiManager } from "../../interfaces";
 
 export class SlackConnectionManager implements ISlackConnectionManager {
     private rtmConnectionManager: IRtmConnectionManager;

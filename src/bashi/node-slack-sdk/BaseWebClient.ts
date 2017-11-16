@@ -1,4 +1,4 @@
-import { IWebClient } from "../../interfaces/node-slack-sdk/IWebClient";
+import { IWebClient } from "../../interfaces";
 
 export class BaseWebClient {
     protected webClient: IWebClient;

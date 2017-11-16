@@ -1,14 +1,9 @@
 import { App } from "../app";
-import { RtmConnectionManager } from "../bashi/slack-connection-manager/RtmConnectionManager";
-import { SlackConnectionManager } from "../bashi/slack-connection-manager/SlackConnectionManager";
-import { SlackDataManager } from "../bashi/slack-connection-manager/SlackDataManager";
-import { WebApiManager } from "../bashi/slack-connection-manager/WebApiManager";
+import { RtmConnectionManager, SlackConnectionManager, SlackDataManager, WebApiManager } from "../bashi";
 
-import { BaseRtmClient } from "../bashi/node-slack-sdk/BaseRtmClient";
-import { SlackRtmClient } from "../bashi/node-slack-sdk/SlackRtmClient";
+import { BaseRtmClient, SlackRtmClient } from "../bashi";
 
-import { IRtmConnectionManager } from "../interfaces/slack-connection-manager/IRtmConnectionManager";
-import { ISlackConnectionManager } from "../interfaces/slack-connection-manager/ISlackConnectionManager";
+import { IRtmConnectionManager, ISlackConnectionManager } from "../interfaces";
 
 export class BashiFactory {
     private botToken: string;
