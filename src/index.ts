@@ -12,7 +12,8 @@ if (error !== undefined) {
 }
 
 const botToken: string = process.env.SLACK_BOT_TOKEN;
-const bashiFactory: BashiFactory = new BashiFactory(botToken);
+const trainUrl: string = process.env.TRAIN_URL;
+const bashiFactory: BashiFactory = new BashiFactory(botToken, trainUrl);
 const app: App = bashiFactory.createApp();
 
 app.start();

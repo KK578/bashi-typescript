@@ -2,15 +2,17 @@ import { App } from "../app";
 
 import { BaseRtmClient, BaseWebClient, RtmMessageManager, SlackRtmClient, SlackWebClient } from "../bashi";
 import { RtmConnectionManager, SlackConnectionManager, SlackDataManager, WebClientManager } from "../bashi";
-import { InstantMessageListener } from "../bashi";
+import { InstantMessageListener, TrainDataCrawler, TrainListener } from "../bashi";
 
 import { IRtmConnectionManager, IRtmListener, ISlackConnectionManager } from "../interfaces";
 
 export class BashiFactory {
     private botToken: string;
+    private trainUrl: string;
 
-    constructor(botToken: string) {
+    constructor(botToken: string, trainUrl: string) {
         this.botToken = botToken;
+        this.trainUrl = trainUrl;
     }
 
     public createApp(): App {
@@ -59,11 +61,22 @@ export class BashiFactory {
 
     public createRtmListeners(slackConnectionManager: ISlackConnectionManager): IRtmListener[] {
         return [
-            this.createInstantMessageMessager(slackConnectionManager)
+            this.createInstantMessageMessager(slackConnectionManager),
+            this.createTrainListener(slackConnectionManager)
         ];
     }
 
     public createInstantMessageMessager(slackConnectionManager: ISlackConnectionManager) {
         return new InstantMessageListener(slackConnectionManager);
+    }
+
+    public createTrainListener(slackConnectionManager: ISlackConnectionManager) {
+        const trainDataCrawler = this.createTrainDataCrawler();
+
+        return new TrainListener(this.trainUrl, slackConnectionManager, trainDataCrawler);
+    }
+
+    public createTrainDataCrawler() {
+        return new TrainDataCrawler();
     }
 }

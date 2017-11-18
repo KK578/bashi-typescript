@@ -20,6 +20,9 @@ export class RtmConnectionManager implements IRtmConnectionManager {
         this.rtmClient.on(CLIENT_EVENTS.RTM.AUTHENTICATED,
                           this.onAuthenticated.bind(this));
 
+        this.rtmClient.on(CLIENT_EVENTS.RTM.UNABLE_TO_RTM_START,
+                          this.onFail.bind(this));
+
         this.rtmClient.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED,
                           this.onConnected.bind(this));
 
@@ -29,6 +32,10 @@ export class RtmConnectionManager implements IRtmConnectionManager {
 
     private onAuthenticated(data) {
         console.log(`${this.slackDataManager.bot.name}: Logged in!`);
+    }
+
+    private onFail(data) {
+        console.log("Failed to log in.");
     }
 
     private onConnected(data) {

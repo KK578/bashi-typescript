@@ -15,11 +15,16 @@
   "license": "BSD-3-Clause",
   "dependencies": {
     "@slack/client": "^3.14.1",
+    "@types/cheerio": "^0.22.5",
     "@types/dotenv": "^4.0.2",
+    "@types/lodash": "^4.14.85",
+    "@types/request-promise-native": "^1.0.10",
     "cheerio": "^1.0.0-rc.2",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
+    "lodash": "^4.17.4",
     "request": "^2.83.0",
+    "request-promise-native": "^1.0.5",
     "typescript": "^2.6.1"
   },
   "devDependencies": {

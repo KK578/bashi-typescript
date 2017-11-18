@@ -26,6 +26,3 @@ export class App {
         });
     }
 }
-
-// Respond to train requests.
-// require("./src/train-time-notifier");
