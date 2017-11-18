@@ -1,0 +1,53 @@
+{
+    "extends": "tslint:recommended",
+    "rules": {
+        "no-console": {
+            "severity": "off"
+        },
+        "trailing-comma": false,
+        "eofline": true,
+
+        // TypeScript
+        "member-access": "error",
+        "member-ordering": [
+            "error",
+            {
+                "order": [
+                    "public-static-field",
+                    "protected-static-field",
+                    "private-static-field",
+                    "public-instance-field",
+                    "protected-instance-field",
+                    "private-instance-field",
+                    "public-constructor",
+                    "protected-constructor",
+                    "private-constructor",
+                    "public-static-method",
+                    "protected-static-method",
+                    "private-static-method",
+                    "public-instance-method",
+                    "protected-instance-method",
+                    "private-instance-method"
+                ]
+            }
+        ],
+        "typedef-whitespace": [
+            "error",
+            {
+                "call-signature": "nospace",
+                "index-signature": "nospace",
+                "parameter": "nospace",
+                "property-declaration": "nospace",
+                "variable-declaration": "nospace"
+            },
+            {
+                "call-signature": "onespace",
+                "index-signature": "onespace",
+                "parameter": "onespace",
+                "property-declaration": "onespace",
+                "variable-declaration": "onespace"
+            }
+        ],
+        "type-literal-delimiter": true
+    }
+}

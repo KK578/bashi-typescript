@@ -23,7 +23,8 @@
     "no-console": "off",
     "no-empty-function": "warn",
     "no-multi-spaces": "error",
-    "no-unused-vars": "warn",
+    "no-undef": "off",
+    "no-unused-vars": "off",
     "no-sequences": "error",
 
     // Styling
@@ -62,7 +63,7 @@
     "object-curly-spacing": [ "error", "always" ],
     "one-var": [ "error", "never" ],
     "padded-blocks": [ "error", "never" ],
-    "quotes": [ "error", "single" ],
+    "quotes": [ "error", "double" ],
     "semi": "error",
     "space-before-function-paren": [ "error", {"anonymous": "always", "named": "never"} ],
     "space-in-parens": "error",
