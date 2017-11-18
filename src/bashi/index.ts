@@ -9,6 +9,6 @@ export { SlackConnectionManager } from "./slack-connection-manager/SlackConnecti
 export { SlackDataManager } from "./slack-connection-manager/SlackDataManager";
 export { WebClientManager } from "./slack-connection-manager/WebClientManager";
 
-export { InstantMessageListener } from "./conversation/instant-message-listener";
-export { TrainDataCrawler } from "./train-time-notifier/train-data-crawler";
-export { TrainListener } from "./train-time-notifier/train-listener";
+export { InstantMessageListener } from "./conversation/instant-message-replier/instant-message-listener";
+export { TrainDataCrawler } from "./conversation/train-time-notifier/train-data-crawler";
+export { TrainListener } from "./conversation/train-time-notifier/train-listener";

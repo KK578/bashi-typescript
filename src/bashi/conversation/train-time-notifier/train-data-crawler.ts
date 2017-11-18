@@ -2,7 +2,7 @@ import * as cheerio from "cheerio";
 import * as _ from "lodash";
 import * as request from "request-promise-native";
 
-import { ITrainDataCrawler } from "../../interfaces";
+import { ITrainDataCrawler } from "../../../interfaces";
 
 export class TrainDataCrawler implements ITrainDataCrawler {
     public getTrainData(url) {

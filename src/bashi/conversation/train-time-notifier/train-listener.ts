@@ -1,4 +1,4 @@
-import { IRtmListener, ISlackConnectionManager, ITrainDataCrawler } from "../../interfaces";
+import { IRtmListener, ISlackConnectionManager, ITrainDataCrawler } from "../../../interfaces";
 
 export class TrainListener implements IRtmListener {
     private url: string;

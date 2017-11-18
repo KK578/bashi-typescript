@@ -1,4 +1,4 @@
-import { App } from "../app";
+import { App } from "../bashi/app";
 
 import { BaseRtmClient, BaseWebClient, RtmMessageManager, SlackRtmClient, SlackWebClient } from "../bashi";
 import { RtmConnectionManager, SlackConnectionManager, SlackDataManager, WebClientManager } from "../bashi";

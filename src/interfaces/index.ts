@@ -1,6 +1,6 @@
 export { IRtmListener } from "./conversation/IRtmListener";
-export { ITrainData } from "./train-time-notifier/ITrainData";
-export { ITrainDataCrawler } from "./train-time-notifier/ITrainDataCrawler";
+export { ITrainData } from "./conversation/train-time-notifier/ITrainData";
+export { ITrainDataCrawler } from "./conversation/train-time-notifier/ITrainDataCrawler";
 
 export { IRtmClient } from "./node-slack-sdk/IRtmClient";
 export { IWebClient } from "./node-slack-sdk/IWebClient";

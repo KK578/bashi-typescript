@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 
-import { App } from "./app";
+import { App } from "./bashi/app";
 import { BashiFactory } from "./factory/bashi-factory";
 
 const envLoaded: dotenv.DotenvResult = dotenv.config();

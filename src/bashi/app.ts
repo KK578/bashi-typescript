@@ -1,4 +1,4 @@
-import { IRtmListener, ISlackConnectionManager } from "./interfaces";
+import { IRtmListener, ISlackConnectionManager } from "../interfaces";
 
 export class App {
     private slackConnectionManager: ISlackConnectionManager;
