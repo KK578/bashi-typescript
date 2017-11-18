@@ -12,6 +12,6 @@ export class WebClientManager implements IWebClientManager {
     ///////////////////////////////////////////////////////////
     // WebApiManager
     public sendMessage(message, callback) {
-        this.webClient.chat.postMessage(message, callback);
+        this.webClient.postMessage(message, callback);
     }
 }

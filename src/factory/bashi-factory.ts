@@ -1,9 +1,10 @@
 import { App } from "../app";
-import { RtmConnectionManager, SlackConnectionManager, SlackDataManager, WebClientManager } from "../bashi";
 
 import { BaseRtmClient, BaseWebClient, RtmMessageManager, SlackRtmClient, SlackWebClient } from "../bashi";
+import { RtmConnectionManager, SlackConnectionManager, SlackDataManager, WebClientManager } from "../bashi";
+import { InstantMessageListener } from "../bashi";
 
-import { IRtmConnectionManager, ISlackConnectionManager } from "../interfaces";
+import { IRtmConnectionManager, IRtmListener, ISlackConnectionManager } from "../interfaces";
 
 export class BashiFactory {
     private botToken: string;
@@ -14,8 +15,9 @@ export class BashiFactory {
 
     public createApp(): App {
         const slackConnectionManager = this.createSlackConnectionManager();
+        const rtmListeners = this.createRtmListeners(slackConnectionManager);
 
-        return new App(slackConnectionManager);
+        return new App(slackConnectionManager, rtmListeners);
     }
 
     public createSlackConnectionManager(): ISlackConnectionManager {
@@ -53,5 +55,15 @@ export class BashiFactory {
 
     public createWebClient(): BaseWebClient {
         return new SlackWebClient(this.botToken);
+    }
+
+    public createRtmListeners(slackConnectionManager: ISlackConnectionManager): IRtmListener[] {
+        return [
+            this.createInstantMessageMessager(slackConnectionManager)
+        ];
+    }
+
+    public createInstantMessageMessager(slackConnectionManager: ISlackConnectionManager) {
+        return new InstantMessageListener(slackConnectionManager);
     }
 }

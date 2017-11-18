@@ -5,4 +5,6 @@ export interface IRtmConnectionManager {
 
     start(): void;
     stop(): void;
+
+    subscribeToRtm(event, callback);
 }

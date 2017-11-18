@@ -9,12 +9,23 @@ export class SlackConnectionManager implements ISlackConnectionManager {
         this.webClientManager = webClientManager;
     }
 
+    // Getters
+    public getSlackDataManager() {
+        return this.rtmConnectionManager.slackDataManager;
+    }
+
+    // RtmConnectionManager
     public start(): void {
         console.log("Starting");
         this.rtmConnectionManager.start();
     }
 
-    public subscribeToRtm(eventName: string, callback: (error: Error, data: {}) => void): void {
-        console.log(eventName);
+    public subscribeToRtm(eventName: string, callback): void {
+        this.rtmConnectionManager.subscribeToRtm(eventName, callback);
+    }
+
+    // WebClientManager
+    public sendMessage(message, callback) {
+        this.webClientManager.sendMessage(message, callback);
     }
 }

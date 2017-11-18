@@ -8,4 +8,6 @@ export interface ISlackDataManager {
     instantMessages: FullChannelResult[];
 
     setData(data): void;
+
+    isPrivateChannel(channel: string): boolean;
 }

@@ -1,3 +1,5 @@
+export { IRtmListener } from "./conversation/IRtmListener";
+
 export { IRtmClient } from "./node-slack-sdk/IRtmClient";
 export { IWebClient } from "./node-slack-sdk/IWebClient";
 

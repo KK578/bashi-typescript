@@ -1,12 +1,13 @@
-import { ISlackConnectionManager } from "./interfaces/slack-connection-manager/ISlackConnectionManager";
+import { IRtmListener, ISlackConnectionManager } from "./interfaces";
 
 export class App {
     private slackConnectionManager: ISlackConnectionManager;
-    // slackConnectionListeners : [ISlackConnectionListeners]
+    private rtmListeners: IRtmListener[];
 
-    public constructor(slackConnectionManager: ISlackConnectionManager) {
-        // TODO
+    public constructor(slackConnectionManager: ISlackConnectionManager,
+                       rtmListeners: IRtmListener[]) {
         this.slackConnectionManager = slackConnectionManager;
+        this.rtmListeners = rtmListeners;
     }
 
     public start() {
@@ -19,11 +20,12 @@ export class App {
     }
 
     private subscribeSlackListeners(): void {
-        // throw new Error("Method not implemented.");
+        this.rtmListeners.forEach((listener) => {
+            this.slackConnectionManager.subscribeToRtm("message",
+                                                       listener.onMessage.bind(listener));
+        });
     }
 }
 
-// Conversation
-// require("./src/conversation");
 // Respond to train requests.
 // require("./src/train-time-notifier");

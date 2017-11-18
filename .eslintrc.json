@@ -23,8 +23,8 @@
     "no-console": "off",
     "no-empty-function": "warn",
     "no-multi-spaces": "error",
-    "no-undef": "warn",
-    "no-unused-vars": "warn",
+    "no-undef": "off",
+    "no-unused-vars": "off",
     "no-sequences": "error",
 
     // Styling

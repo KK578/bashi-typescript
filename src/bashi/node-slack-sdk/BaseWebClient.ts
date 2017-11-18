@@ -7,9 +7,7 @@ export class BaseWebClient {
         this.webClient = webClient;
     }
 
-    public chat = {
-        postMessage(message: any, callback: any): any {
-            return this.webClient.chat.postMessage(message.channel, message.text, message);
-        }
-    };
+    public postMessage(message: any, callback: any): any {
+        return this.webClient.chat.postMessage(message.channel, message.text, message);
+    }
 }

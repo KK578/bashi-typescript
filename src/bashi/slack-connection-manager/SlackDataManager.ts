@@ -15,4 +15,8 @@ export class SlackDataManager implements ISlackDataManager {
         this.channels = data.channels;
         this.instantMessages = data.ims;
     }
+
+    public isPrivateChannel(channel: string) {
+        return this.instantMessages.filter((c) => c.id === channel).length > 0;
+    }
 }

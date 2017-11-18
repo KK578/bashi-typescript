@@ -8,3 +8,5 @@ export { RtmMessageManager } from "./slack-connection-manager/RtmMessageManager"
 export { SlackConnectionManager } from "./slack-connection-manager/SlackConnectionManager";
 export { SlackDataManager } from "./slack-connection-manager/SlackDataManager";
 export { WebClientManager } from "./slack-connection-manager/WebClientManager";
+
+export { InstantMessageListener } from "./conversation/instant-message-listener";

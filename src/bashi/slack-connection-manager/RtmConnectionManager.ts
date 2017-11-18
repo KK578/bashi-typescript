@@ -48,4 +48,8 @@ export class RtmConnectionManager implements IRtmConnectionManager {
     public stop(): void {
         throw new Error("Method not implemented.");
     }
+
+    public subscribeToRtm(event, callback) {
+        this.rtmMessageManager.on(event, callback);
+    }
 }
