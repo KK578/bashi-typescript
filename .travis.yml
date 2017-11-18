@@ -1,0 +1,16 @@
+sudo: false
+dist: trusty
+cache:
+  directories: 
+   - "node_modules"
+
+language: node_js
+node_js:
+ - "node"
+
+install:
+ - npm install -g grunt-cli
+ - npm install
+
+script:
+ - grunt lint
