@@ -1,13 +1,17 @@
 module.exports = {
     options: {
-        reporter: "spec"
+        reporter: "spec",
+        require: [
+            "ts-node/register",
+            "source-map-support/register"
+        ]
     },
     project: {
         files: [
             {
                 expand: true,
-                cwd: "build/",
-                src: ["test/**/*-test.js"]
+                cwd: "src/",
+                src: ["test/**/*-test.ts"]
             }
         ]
     }
