@@ -14,6 +14,7 @@
     "build": "scripty",
     "clean": "scripty",
     "coverage": "scripty",
+    "coveralls": "scripty",
     "test": "scripty",
     "lint": "scripty",
     "lint:eslint": "scripty",
