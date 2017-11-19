@@ -11,7 +11,7 @@ module.exports = {
             {
                 expand: true,
                 cwd: "src/",
-                src: ["test/**/*-test.ts"]
+                src: ["test/**/*.test.ts"]
             }
         ]
     }
