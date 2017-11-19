@@ -11,7 +11,7 @@
   },
   "scripts": {
     "postinstall": "bash scripts/postinstall.sh",
-    "test": "nyc grunt test"
+    "test": "scripty"
   },
   "license": "BSD-3-Clause",
   "dependencies": {
@@ -26,6 +26,7 @@
     "lodash": "^4.17.4",
     "request": "^2.83.0",
     "request-promise-native": "^1.0.5",
+    "scripty": "^1.7.2",
     "typescript": "^2.6.1"
   },
   "devDependencies": {
