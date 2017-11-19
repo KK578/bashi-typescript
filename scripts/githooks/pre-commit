@@ -2,7 +2,7 @@
 PREFIX="[Pre Commit]"
 
 set -e
-grunt lint
+npm run lint
 LINT_COMMAND_RESULT=$?
 
 if [[ $LINT_COMMAND_RESULT != 0 ]]; then

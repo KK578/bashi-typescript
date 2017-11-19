@@ -1,2 +1,0 @@
-#!/usr/bin/env sh
-eslint --format="node_modules/eslint-formatter-pretty" -- "gruntfile.js" "grunt/*.js"
