@@ -11,7 +11,8 @@
   },
   "scripts": {
     "postinstall": "bash scripts/postinstall.sh",
-    "test": "scripty"
+    "test": "scripty",
+    "coverage": "scripty"
   },
   "license": "BSD-3-Clause",
   "dependencies": {
