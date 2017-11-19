@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+eslint --parser="typescript-eslint-parser" --parser-options="{ sourceType: 'module' }" --format="node_modules/eslint-formatter-pretty" -- "src/**/*.ts"

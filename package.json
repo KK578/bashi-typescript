@@ -11,8 +11,12 @@
   },
   "scripts": {
     "postinstall": "bash scripts/postinstall.sh",
+    "coverage": "scripty",
     "test": "scripty",
-    "coverage": "scripty"
+    "lint": "scripty",
+    "lint:eslint-js": "scripty",
+    "lint:eslint-ts": "scripty",
+    "lint:tslint": "scripty"
   },
   "license": "BSD-3-Clause",
   "dependencies": {

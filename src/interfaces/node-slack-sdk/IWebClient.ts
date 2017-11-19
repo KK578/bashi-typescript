@@ -7,6 +7,9 @@ import { ChatPostMessageParams, ChatPostMessageResult } from "@slack/client";
  */
 export interface IWebClient {
     chat: {
-        postMessage(channel: string, text: string, opts?: ChatPostMessageParams): Promise<ChatPostMessageResult>;
+        postMessage(channel: string,
+                    text: string,
+                    opts?: ChatPostMessageParams)
+                    : Promise<ChatPostMessageResult>;
     };
 }
