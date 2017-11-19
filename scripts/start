@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+if [ ! -f build/index.js ]; then
+    echo "Building Bashi."
+    npm run build
+    echo ""
+    echo "Bashi successfully built."
+    echo ""
+fi
+
+node build/index.js

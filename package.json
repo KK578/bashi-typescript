@@ -18,7 +18,8 @@
     "lint": "scripty",
     "lint:eslint-js": "scripty",
     "lint:eslint-ts": "scripty",
-    "lint:tslint": "scripty"
+    "lint:tslint": "scripty",
+    "start": "scripty"
   },
   "license": "BSD-3-Clause",
   "dependencies": {
