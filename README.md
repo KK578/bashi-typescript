@@ -1,5 +1,7 @@
 # Bashi
 
+[![Build Status](https://travis-ci.org/KK578/bashi.svg?branch=master)](https://travis-ci.org/KK578/bashi)
+
 This project has been templated by [generator-kk578](https://github.com/KK578/generator-kk578).
 
 ## License
