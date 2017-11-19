@@ -13,8 +13,12 @@ cache:
   - "node_modules"
 
 install:
- - npm install -g grunt-cli
+ - npm install -g grunt-cli coveralls
  - npm install
 
 script:
  - grunt lint
+ - npm test
+
+after_success:
+ - nyc report --reporter=text-lcov | coveralls

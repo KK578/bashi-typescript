@@ -5,5 +5,11 @@ module.exports = {
             "eslint",
             "tslint"
         ]
+    },
+    test: {
+        description: "Test project",
+        tasks: [
+            "mochaTest"
+        ]
     }
 };
