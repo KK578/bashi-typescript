@@ -16,7 +16,7 @@
     "coverage": "scripty",
     "test": "scripty",
     "lint": "scripty",
-    "lint:eslint-ts": "scripty",
+    "lint:eslint": "scripty",
     "lint:tslint": "scripty",
     "start": "scripty"
   },
@@ -40,6 +40,7 @@
     "@types/chai": "^4.0.5",
     "@types/mocha": "^2.2.44",
     "chai": "^4.1.2",
+    "eslint": "^4.11.0",
     "eslint-formatter-pretty": "^0.2.2",
     "mocha": "^4.0.1",
     "nyc": "^11.3.0",
