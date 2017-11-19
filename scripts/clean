@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+rm -rvf build/
+rm -rvf coverage/
+rm -rvf .nyc_output/
+rm -rvf .tscache/
