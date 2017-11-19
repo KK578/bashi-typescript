@@ -11,6 +11,8 @@
   },
   "scripts": {
     "postinstall": "bash scripts/postinstall.sh",
+    "build": "scripty",
+    "clean": "scripty",
     "coverage": "scripty",
     "test": "scripty",
     "lint": "scripty",
