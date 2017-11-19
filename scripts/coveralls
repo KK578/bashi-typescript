@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+nyc report --reporter=text-lcov | coveralls --verbose

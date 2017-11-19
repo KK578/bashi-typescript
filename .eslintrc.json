@@ -1,7 +1,9 @@
 {
   "extends": "eslint:recommended",
+  "parser": "typescript-eslint-parser",
   "parserOptions": {
-    "ecmaVersion": 6
+    "ecmaVersion": 6,
+    "sourceType": "module"
   },
   "env": {
     "browser": true,
@@ -37,7 +39,16 @@
     "comma-style": "error",
     "eol-last": "error",
     "func-style": [ "error", "declaration", { "allowArrowFunctions": true } ],
-    "indent": [ "error", 4, { "SwitchCase": 1 } ],
+    "indent": [ "error", 4, {
+      "ArrayExpression": 1,
+      "SwitchCase": 1,
+      "ImportDeclaration": 1,
+      "ObjectExpression": 1,
+      "MemberExpression": "off",
+      "FunctionDeclaration": { "parameters": "first" },
+      "FunctionExpression": { "parameters": "first" },
+      "CallExpression": { "arguments": "first" }
+    }],
     "key-spacing": "error",
     "keyword-spacing": "error",
     "linebreak-style": [ "warn", "unix" ],
