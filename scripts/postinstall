@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 if [ ! -z $npm_config_production ]; then
     exit
 fi

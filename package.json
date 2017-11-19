@@ -10,7 +10,7 @@
     "url": "https://github.com/KK578/bashi"
   },
   "scripts": {
-    "postinstall": "bash scripts/postinstall.sh",
+    "postinstall": "scripty",
     "build": "scripty",
     "clean": "scripty",
     "coverage": "scripty",
