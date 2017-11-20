@@ -16,28 +16,41 @@ describe("InstantMessageListener", () => {
     });
 
     describe("#onMessage", () => {
-        it("should send a message if channel is private message", () => {
-            const stub = sinon.stub(mockSlackConnectionManager, "sendMessage");
+        let stubs: sinon.SinonStub[];
 
-            instantMessageListener.onMessage({
-                channel: "true",
-                text: "Hello"
-            });
-
-            expect(mockSlackConnectionManager.sendMessage).to.have.been.called;
-            stub.restore();
+        afterEach(() => {
+            stubs.forEach((stub) => stub.restore);
+            stubs = [];
         });
 
-        it("should not send a message if channel is private message", () => {
-            const stub = sinon.stub(mockSlackConnectionManager, "sendMessage");
+        it("should send a message if channel is private message", () => {
+            stubs = [
+                sinon.stub(mockSlackDataManager, "isPrivateChannel").returns(true),
+                sinon.stub(mockSlackConnectionManager, "sendMessage")
+            ];
 
             instantMessageListener.onMessage({
-                channel: "false",
-                text: "Hello"
+                channel: "AnyChannelID",
+                text: "AnyText"
+            });
+
+            expect(mockSlackConnectionManager.sendMessage)
+                  .to.have.been.calledWithMatch(sinon.match.has("channel", "AnyChannelID"))
+                  .and.calledWithMatch(sinon.match.has("text"));
+        });
+
+        it("should not send a message if channel is not private message", () => {
+            stubs = [
+                sinon.stub(mockSlackDataManager, "isPrivateChannel").returns(false),
+                sinon.stub(mockSlackConnectionManager, "sendMessage")
+            ];
+
+            instantMessageListener.onMessage({
+                channel: "AnyChannelID",
+                text: "AnyText"
             });
 
             expect(mockSlackConnectionManager.sendMessage).to.not.have.been.called;
-            stub.restore();
         });
     });
 });

@@ -16,6 +16,6 @@ export class MockSlackDataManager implements ISlackDataManager {
     }
 
     public isPrivateChannel(channel: string): boolean {
-        return channel === "true";
+        return true;
     }
 }
