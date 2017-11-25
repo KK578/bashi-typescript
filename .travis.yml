@@ -13,10 +13,13 @@ cache:
   - "node_modules"
 
 install:
+ - npm install -g nsp npm-check
  - npm install coveralls
  - npm install
 
 script:
+ - npm-check -s
+ - nsp check
  - npm run lint
  - npm run build
  - npm run coverage
