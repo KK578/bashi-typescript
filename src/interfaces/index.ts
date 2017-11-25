@@ -1,12 +1,12 @@
-export { IRtmListener } from "./conversation/IRtmListener";
-export { ITrainData } from "./conversation/train-time-notifier/ITrainData";
-export { ITrainDataCrawler } from "./conversation/train-time-notifier/ITrainDataCrawler";
+export { IRtmListener } from "./bashi/conversation/IRtmListener";
+export { ITrainData } from "./bashi/conversation/train-time-notifier/ITrainData";
+export { ITrainDataCrawler } from "./bashi/conversation/train-time-notifier/ITrainDataCrawler";
 
-export { IRtmClient } from "./node-slack-sdk/IRtmClient";
-export { IWebClient } from "./node-slack-sdk/IWebClient";
+export { IRtmClient } from "./slack/node-slack-sdk/IRtmClient";
+export { IWebClient } from "./slack/node-slack-sdk/IWebClient";
 
-export { IRtmConnectionManager } from "./slack-connection-manager/IRtmConnectionManager";
-export { IRtmMessageManager } from "./slack-connection-manager/IRtmMessageManager";
-export { ISlackConnectionManager } from "./slack-connection-manager/ISlackConnectionManager";
-export { ISlackDataManager } from "./slack-connection-manager/ISlackDataManager";
-export { IWebClientManager } from "./slack-connection-manager/IWebClientManager";
+export { IRtmConnectionManager } from "./slack/slack-connection-manager/IRtmConnectionManager";
+export { IRtmMessageManager } from "./slack/slack-connection-manager/IRtmMessageManager";
+export { ISlackConnectionManager } from "./slack/slack-connection-manager/ISlackConnectionManager";
+export { ISlackDataManager } from "./slack/slack-connection-manager/ISlackDataManager";
+export { IWebClientManager } from "./slack/slack-connection-manager/IWebClientManager";
