@@ -15,7 +15,7 @@ export interface ITimeEvent extends IEvent {
     setCallback(): NodeJS.Timer;
 
     /**
-     * Callback to raise when 
+     * Callback to raise when timeout occurs.
      */
     callback(): void;
 }

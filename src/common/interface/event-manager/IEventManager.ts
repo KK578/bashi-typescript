@@ -5,4 +5,3 @@ export interface IEventManager {
 
     onEvent(event): void;
 }
- 
