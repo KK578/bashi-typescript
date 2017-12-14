@@ -1,11 +1,11 @@
-import { BaseEvent } from "./";
 import { ITimeEvent } from "../../interface/";
+import { BaseEvent } from "./";
 
 export abstract class BaseFixedTimeEvent extends BaseEvent implements ITimeEvent {
-    abstract timeTrigger: Date;
-    abstract callback(): void;
+    public abstract timeTrigger: Date;
+    public abstract callback(): void;
 
-    setCallback(): NodeJS.Timer {
+    public setCallback(): NodeJS.Timer {
         // TODO: Resolve a level of accuracy we need for the timeout.
         const timeToCallback : number = this.timeTrigger.getTime() - this.time.getTime();
 
