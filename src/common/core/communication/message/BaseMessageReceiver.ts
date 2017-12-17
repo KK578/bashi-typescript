@@ -1,7 +1,7 @@
-import { IMessage, IMessageEvent, IMessageEventManager, IMessageReceiver } from "../../interface/";
+import { IMessage, IMessageEvent, IMessageEventManager, IMessageReceiver } from "../../../interface/";
 
 export abstract class BaseMessageReceiver implements IMessageReceiver {
-    protected managers: [IMessageEventManager];
+    protected managers: IMessageEventManager[];
 
     public abstract connect(): Promise<boolean>;
     public abstract disconnect(): Promise<boolean>;
