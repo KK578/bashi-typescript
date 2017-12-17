@@ -1,15 +1,15 @@
-import { IMessageEventManager, IMessageReceiver, IMessage, IMessageEvent } from "../../interface/";
+import { IMessage, IMessageEvent, IMessageEventManager, IMessageReceiver } from "../../interface/";
 
 export abstract class BaseMessageReceiver implements IMessageReceiver {
     protected managers: [IMessageEventManager];
 
-    abstract connect(): Promise<boolean>;
-    abstract disconnect(): Promise<boolean>;
+    public abstract connect(): Promise<boolean>;
+    public abstract disconnect(): Promise<boolean>;
 
     /**
      * Converts an IMessage to IMessageEvent.
      */
-    abstract messageToEvent(message: IMessage): IMessageEvent;
+    public abstract messageToEvent(message: IMessage): IMessageEvent;
 
     protected onMessage(message: IMessage) {
         this.managers.forEach((manager) => manager.onEvent(this.messageToEvent(message)));
