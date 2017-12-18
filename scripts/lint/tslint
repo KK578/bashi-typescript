@@ -1,2 +1,2 @@
 #!/usr/bin/env sh
-tslint --format stylish --config .tslint.json --project .
+# tslint --format stylish --config .tslint.json --project .

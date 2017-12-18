@@ -3,6 +3,10 @@ import { IMessage, IMessageEvent, IMessageEventManager, IMessageReceiver } from 
 export abstract class BaseMessageReceiver implements IMessageReceiver {
     protected managers: IMessageEventManager[];
 
+    protected constructor() {
+        this.managers = [];
+    }
+
     public abstract connect(): Promise<boolean>;
     public abstract disconnect(): Promise<boolean>;
 

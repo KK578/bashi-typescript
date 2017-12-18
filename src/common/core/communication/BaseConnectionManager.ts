@@ -6,9 +6,14 @@ enum ConnectionMethod {
     Disconnect
 }
 
-export class BaseConnectionManager implements IConnectionManager {
-    protected receivers: [IMessageReceiver];
-    protected senders: [IMessageSender];
+export abstract class BaseConnectionManager implements IConnectionManager {
+    protected receivers: IMessageReceiver[];
+    protected senders: IMessageSender[];
+
+    protected constructor() {
+        this.receivers = [];
+        this.senders = [];
+    }
 
     private handlePromise(promise: () => Promise<boolean>) {
         return promise().then((a) => a)
