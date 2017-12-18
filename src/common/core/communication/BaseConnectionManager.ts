@@ -15,37 +15,55 @@ export abstract class BaseConnectionManager implements IConnectionManager {
         this.senders = [];
     }
 
-    private handlePromise(promise: () => Promise<boolean>) {
-        return promise().then((a) => a)
-                        .catch((_) => {
-                            // TODO: Log error
-                            const result = false;
-
-                            return result;
-                        });
-    }
-
-    private handleConnect(connection: IConnection) {
-        return this.handlePromise(connection.connect);
-    }
-
-    private handleDisconnect(connection: IConnection) {
-        return this.handlePromise(connection.disconnect);
-    }
-
+    // IConnection
     public connect() {
-        const receiverPromises = this.receivers.map(this.handleConnect);
-        const senderPromises = this.senders.map(this.handleConnect);
+        const receiverPromises = this.receivers.map(this.handleConnect.bind(this));
+        const senderPromises = this.senders.map(this.handleConnect.bind(this));
 
         return Promise.all(receiverPromises.concat(senderPromises))
                       .then((s) => s.reduce((a, b) => a && b));
     }
 
     public disconnect() {
-        const receiverPromises = this.receivers.map(this.handleDisconnect);
-        const senderPromises = this.senders.map(this.handleDisconnect);
+        const receiverPromises = this.receivers.map(this.handleDisconnect.bind(this));
+        const senderPromises = this.senders.map(this.handleDisconnect.bind(this));
 
         return Promise.all(receiverPromises.concat(senderPromises))
                       .then((s) => s.reduce((a, b) => a && b));
+    }
+
+    // Private
+    private handleConnect(connection: IConnection) {
+        return this.handlePromise(connection, ConnectionMethod.Connect);
+    }
+
+    private handleDisconnect(connection: IConnection) {
+        return this.handlePromise(connection, ConnectionMethod.Disconnect);
+    }
+
+    private handlePromise(connection: IConnection, method: ConnectionMethod) {
+        let promise;
+
+        switch (method) {
+            case ConnectionMethod.Connect:
+                promise = connection.connect;
+                break;
+
+            case ConnectionMethod.Disconnect:
+                promise = connection.disconnect;
+                break;
+
+            default:
+                throw new Error("Invalid Connection Method.");
+        }
+
+        return promise.call(connection)
+                      .then((a) => a)
+                      .catch((_) => {
+                          // TODO: Log error
+                          const result = false;
+
+                          return result;
+                      });
     }
 }

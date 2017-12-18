@@ -2,7 +2,7 @@ import { SlackMessageEvent } from "../../";
 import { BaseMessageReceiver } from "../../../common/core/";
 import { IMessage, IMessageEvent, IMessageEventManager } from "../../../common/interface/";
 
-import { CLIENT_EVENTS, RtmClient, RtmStartResult, RtmConnectResult } from "@slack/client";
+import { CLIENT_EVENTS, RtmClient, RtmConnectResult, RtmStartResult } from "@slack/client";
 
 export class SlackMessageReceiver extends BaseMessageReceiver {
     private rtmClient: RtmClient;
