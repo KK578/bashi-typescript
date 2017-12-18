@@ -1,4 +1,4 @@
-import { IConnectionManager, IMessageSender, IMessageReceiver, IConnection } from "../../interface/";
+import { IConnection, IConnectionManager, IMessageReceiver, IMessageSender } from "../../interface/";
 
 // TODO: Move this elsewhere.
 enum ConnectionMethod {

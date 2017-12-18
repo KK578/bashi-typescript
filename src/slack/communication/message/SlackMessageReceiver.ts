@@ -1,17 +1,8 @@
+import { SlackMessageEvent } from "../../";
 import { BaseMessageReceiver } from "../../../common/core/";
-import { IMessageEvent, IMessage, IMessageEventManager } from "../../../common/interface/";
+import { IMessage, IMessageEvent, IMessageEventManager } from "../../../common/interface/";
 
 import { CLIENT_EVENTS, RtmClient } from "@slack/client";
-
-export class SlackMessageEvent implements IMessageEvent {
-    message: IMessage;
-    time: Date;
-
-    constructor(message: IMessage) {
-        this.message = message;
-        this.time = new Date(Date.now());
-    }
-}
 
 export class SlackMessageReceiver extends BaseMessageReceiver {
     private rtmClient: RtmClient;
