@@ -1,3 +1,3 @@
-import { IConnection, IMessageReceiver, IMessageSender } from "../";
+import { IConnection } from "../";
 
 export interface IConnectionManager extends IConnection { }
