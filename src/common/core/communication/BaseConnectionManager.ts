@@ -17,41 +17,37 @@ export abstract class BaseConnectionManager implements IConnectionManager {
 
     // IConnection
     public connect() {
-        const receiverPromises = this.chainPromises(this.receivers, ConnectionMethod.Connect);
-        const senderPromises = this.chainPromises(this.senders, ConnectionMethod.Connect);
-
-        return Promise.all(receiverPromises.concat(senderPromises))
-                      .then((s) => s.reduce((a, b) => a && b));
+        return this.chainPromises(ConnectionMethod.Connect, this.receivers, this.senders);
     }
 
     public disconnect() {
-        const receiverPromises = this.chainPromises(this.receivers, ConnectionMethod.Disconnect);
-        const senderPromises = this.chainPromises(this.senders, ConnectionMethod.Disconnect);
-
-        return Promise.all(receiverPromises.concat(senderPromises))
-                      .then((s) => s.reduce((a, b) => a && b));
+        return this.chainPromises(ConnectionMethod.Disconnect, this.receivers, this.senders);
     }
 
     // Private
-    private chainPromises(connections: IConnection[],
-                          method: ConnectionMethod) : Array<Promise<boolean>> {
-        return connections.map((connection) => {
-            let promise: () => Promise<boolean>;
+    private chainPromises(method: ConnectionMethod,
+                          ...connections: IConnection[][]) : Promise<boolean> {
+        const promises = connections.reduce((a, b) => a.concat(b))
+                                    .map((connection) => {
+                                        let promise: () => Promise<boolean>;
 
-            switch (method) {
-                case ConnectionMethod.Connect:
-                    promise = connection.connect;
-                    break;
+                                        switch (method) {
+                                            case ConnectionMethod.Connect:
+                                                promise = connection.connect;
+                                                break;
 
-                case ConnectionMethod.Disconnect:
-                    promise = connection.disconnect;
-                    break;
+                                            case ConnectionMethod.Disconnect:
+                                                promise = connection.disconnect;
+                                                break;
 
-                default:
-                    throw new Error("Invalid Connection Method.");
-            }
+                                            default:
+                                                throw new Error("Invalid Connection Method.");
+                                        }
 
-            return promise.call(connection);
-        });
+                                        return promise.call(connection);
+                                    });
+
+        return Promise.all(promises)
+                      .then((results) => results.reduce((a, b) => a && b));
     }
 }
