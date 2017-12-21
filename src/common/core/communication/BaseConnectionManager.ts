@@ -7,8 +7,8 @@ enum ConnectionMethod {
 }
 
 export abstract class BaseConnectionManager implements IConnectionManager {
-    protected receivers: IMessageReceiver[];
-    protected senders: IMessageSender[];
+    private receivers: IMessageReceiver[];
+    private senders: IMessageSender[];
 
     protected constructor() {
         this.receivers = [];
@@ -22,6 +22,35 @@ export abstract class BaseConnectionManager implements IConnectionManager {
 
     public disconnect() {
         return this.chainPromises(ConnectionMethod.Disconnect, this.receivers, this.senders);
+    }
+
+    // IConnectionManager
+    public subscribeReceiver(receiver: IMessageReceiver) {
+        this.receivers.push(receiver);
+    }
+
+    public unsubscribeReceiver(receiver: IMessageReceiver) {
+        const index = this.receivers.indexOf(receiver);
+
+        if (index < 0) {
+            throw new Error("Cannot unsubscribe a MessageReceiver that is not subscribed.");
+        }
+
+        this.receivers.splice(index, 1);
+    }
+
+    public subscribeSender(sender: IMessageSender) {
+        this.senders.push(sender);
+    }
+
+    public unsubscribeSender(sender: IMessageSender) {
+        const index = this.senders.indexOf(sender);
+
+        if (index < 0) {
+            throw new Error("Cannot unsubscribe a MessageSender that is not subscribed.");
+        }
+
+        this.senders.splice(index, 1);
     }
 
     // Private

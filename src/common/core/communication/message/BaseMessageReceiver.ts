@@ -20,6 +20,7 @@ export abstract class BaseMessageReceiver implements IMessageReceiver {
     }
 
     public subscribe(eventManager: IMessageEventManager): void {
+        // TODO: This behaviour is reused in multiple places, would be good to synchronise.
         const index = this.managers.indexOf(eventManager);
 
         if (index >= 0) {
