@@ -19,7 +19,23 @@ export abstract class BaseMessageReceiver implements IMessageReceiver {
         this.managers.forEach((manager) => manager.onEvent(this.messageToEvent(message)));
     }
 
-    public subscribeToMessages(eventManager: IMessageEventManager): void {
+    public subscribe(eventManager: IMessageEventManager): void {
+        const index = this.managers.indexOf(eventManager);
+
+        if (index >= 0) {
+            throw new Error("The given EventManager is already subscribed.");
+        }
+
         this.managers.push(eventManager);
+    }
+
+    public unsubscribe(eventManager: IMessageEventManager): void {
+        const index = this.managers.indexOf(eventManager);
+
+        if (index < 0) {
+            throw new Error("The given EventManager is not subscribed.");
+        }
+
+        this.managers.splice(index, 1);
     }
 }

@@ -4,5 +4,10 @@ export interface IMessageReceiver extends IConnection {
     /**
      * Subscribe to message events.
      */
-    subscribeToMessages(eventManager: IMessageEventManager): void;
+    subscribe(eventManager: IMessageEventManager): void;
+
+    /**
+     * Unsubscribe from message events.
+     */
+    unsubscribe(eventManager: IMessageEventManager): void;
 }
