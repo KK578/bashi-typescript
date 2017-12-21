@@ -7,7 +7,13 @@ export interface ITimeEvent extends IEvent {
     /**
      * Time when event will be triggered.
      */
-    timeTrigger: Date;
+    eventTime: Date;
+
+    /**
+     * Decides whether eventTime describes the absolute time the event fires,
+     *   or the time to elapse before firing the event.
+     */
+    isAbsoluteTime: boolean;
 
     /**
      * Sets callback up to be called at the correct time.

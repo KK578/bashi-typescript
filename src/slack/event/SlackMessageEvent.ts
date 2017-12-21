@@ -1,11 +1,12 @@
+import { BaseEvent } from "../../common/core/";
 import { IMessage, IMessageEvent } from "../../common/interface/";
 
-export class SlackMessageEvent implements IMessageEvent {
+export class SlackMessageEvent extends BaseEvent implements IMessageEvent {
     public message: IMessage;
-    public time: Date;
 
     constructor(message: IMessage) {
+        super();
+
         this.message = message;
-        this.time = new Date(Date.now());
     }
 }

@@ -1,5 +1,9 @@
 import { IEvent } from "../../interface/";
 
 export abstract class BaseEvent implements IEvent {
-    public time: Date = new Date();
+    public time: Date;
+
+    protected constructor() {
+        this.time = new Date(Date.now());
+    }
 }
