@@ -9,7 +9,7 @@ import { IEvent, IEventHandler } from "../";
  *  that implement logic to handle the event.
  */
 export interface IEventManager {
-    eventHandlers: [IEventHandler];
+    eventHandlers: IEventHandler[];
 
     onEvent(event: IEvent): void;
 }

@@ -1,4 +1,4 @@
-import { SlackMessageEvent } from "../../";
+import { SlackMessageEvent, SlackMessageEventManager } from "../../";
 import { BaseMessageReceiver } from "../../../common/core/";
 import { IMessage, IMessageEvent, IMessageEventManager } from "../../../common/interface/";
 
@@ -15,6 +15,8 @@ export class SlackMessageReceiver extends BaseMessageReceiver {
         this.rtmClient.on(CLIENT_EVENTS.RTM.AUTHENTICATED, this.onAuthenticated.bind(this));
         this.rtmClient.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, this.onConnected.bind(this));
         this.rtmClient.on(CLIENT_EVENTS.RTM.RAW_MESSAGE, this.onMessage.bind(this));
+
+        this.managers.push(new SlackMessageEventManager());
     }
 
     // IConnection
