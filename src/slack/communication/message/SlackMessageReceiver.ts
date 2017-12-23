@@ -34,7 +34,9 @@ export class SlackMessageReceiver extends BaseMessageReceiver {
 
     // IMessageReceiver
     public messageToEvent(message: any): IMessageEvent {
-        return new SlackMessageEvent(message);
+        const parsedMessage: IMessage = JSON.parse(message);
+
+        return new SlackMessageEvent(parsedMessage);
     }
 
     // Private

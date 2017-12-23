@@ -8,8 +8,16 @@ export abstract class BaseEventManager implements IEventManager {
     }
 
     public onEvent(event: IEvent): void {
-        this.eventHandlers.filter((handler) => handler.canHandleEvent.call(handler, event))
-                          // TODO: Consider changing to map and then handling the promises.
-                          .forEach((handler) => handler.handleEvent.call(handler, event));
+        this.eventHandlers.forEach((handler) => {
+            const promise: Promise<boolean> = handler.canHandleEvent.call(handler, event);
+
+            return promise.then((result) => {
+                if (result) {
+                    return handler.handleEvent.call(handler, event);
+                }
+
+                return Promise.resolve();
+            });
+        });
     }
 }

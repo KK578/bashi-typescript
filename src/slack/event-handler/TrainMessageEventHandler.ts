@@ -8,6 +8,9 @@ export class TrainMessageEventHandler implements IMessageEventHandler {
     }
 
     public handleEvent(event: IMessageEvent): Promise<any> {
-        throw new Error("Method not implemented.");
+        console.log("Trains!.");
+        console.log(event);
+
+        return Promise.resolve();
     }
 }
