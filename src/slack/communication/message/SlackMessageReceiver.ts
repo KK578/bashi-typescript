@@ -33,6 +33,7 @@ export class SlackMessageReceiver extends BaseMessageReceiver {
     }
 
     // IMessageReceiver
+    // TODO: Refactor to fire different types of IMessage
     public messageToEvent(message: any): IMessageEvent {
         const parsedMessage: IMessage = JSON.parse(message);
 

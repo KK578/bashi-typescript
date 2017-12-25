@@ -1,6 +1,13 @@
 import { IMessageEvent, IMessageEventHandler } from "../../common/interface/";
+import { SlackMessageSender } from "../index";
 
 export class TrainMessageEventHandler implements IMessageEventHandler {
+    private slackMessageSender: SlackMessageSender;
+
+    constructor() {
+        this.slackMessageSender = new SlackMessageSender(process.env.SLACK_BOT_TOKEN);
+    }
+
     public canHandleEvent(event: IMessageEvent): Promise<boolean> {
         const message = event.message.text.toLowerCase();
 
@@ -8,9 +15,10 @@ export class TrainMessageEventHandler implements IMessageEventHandler {
     }
 
     public handleEvent(event: IMessageEvent): Promise<any> {
-        console.log("Trains!.");
-        console.log(event);
-
-        return Promise.resolve();
+        return this.slackMessageSender.sendMessage({
+            channel: event.message.channel,
+            text: "Did someone mention... _Trains_?",
+            user: ""
+        });
     }
 }
