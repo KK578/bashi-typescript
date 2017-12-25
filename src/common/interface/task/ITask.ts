@@ -1,1 +1,3 @@
-export interface ITask { }
+export interface ITask {
+    invoke(): Promise<any>;
+}

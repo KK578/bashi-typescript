@@ -1,5 +1,7 @@
 import { ITask } from "./";
 
 export interface IWebGetTask extends ITask {
-    invoke(url: string): Promise<any>;
+    url: string;
+
+    invoke(): Promise<string>;
 }

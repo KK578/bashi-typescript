@@ -5,9 +5,15 @@ import { IHtmlParseTask } from "../../common/interface/";
 import { ITrainData } from "./";
 
 export class TrainHtmlParseTask implements IHtmlParseTask {
-    public invoke(html: string): Promise<ITrainData[]> {
+    public html: string;
+
+    constructor(html: string) {
+        this.html = html;
+    }
+
+    public invoke(): Promise<ITrainData[]> {
         const results: ITrainData[] = [];
-        const $ = cheerio.load(html, { normalizeWhitespace: true });
+        const $ = cheerio.load(this.html, { normalizeWhitespace: true });
 
         $(".row.origin").each((i, element) => {
             const $$ = $(element);

@@ -1,12 +1,15 @@
 import { SlackMessageSender, TrainFormatMessageTask, TrainHtmlParseTask } from "../";
 import { MessageTask, WebGetTask } from "../../common/core/";
-import { IMessageEvent, IMessageEventHandler } from "../../common/interface/";
+import { IMessageEvent, IMessageEventHandler, ITaskFactory } from "../../common/interface/";
+import { TaskFactory } from "../../factory/TaskFactory";
 
 export class TrainMessageEventHandler implements IMessageEventHandler {
     private slackMessageSender: SlackMessageSender;
+    private taskFactory: ITaskFactory;
 
     constructor() {
         this.slackMessageSender = new SlackMessageSender(process.env.SLACK_BOT_TOKEN);
+        this.taskFactory = new TaskFactory(this.slackMessageSender);
     }
 
     public canHandleEvent(event: IMessageEvent): Promise<boolean> {
@@ -16,16 +19,28 @@ export class TrainMessageEventHandler implements IMessageEventHandler {
     }
 
     public async handleEvent(event: IMessageEvent): Promise<any> {
-        const messageTask = new MessageTask(this.slackMessageSender);
-        const webGetTask = new WebGetTask();
-        const htmlParseTask = new TrainHtmlParseTask();
-        const formatMessageTask = new TrainFormatMessageTask();
+        const factory = this.taskFactory;
         const channel = event.message.channel;
 
-        await messageTask.invoke(channel, "Did someone mention... _Trains_?");
-        const html = await webGetTask.invoke(process.env.TRAIN_URL);
-        const results = await htmlParseTask.invoke(html);
-        const finalMessage = await formatMessageTask.invoke(results);
-        await messageTask.invoke(channel, finalMessage);
+        await factory.createMessageTask(channel, "Did someone mention... _Trains_?").invoke();
+        const html = await factory.createWebGetTask(process.env.TRAIN_URL).invoke();
+        const results = await factory.createTrainHtmlParseTask(html).invoke();
+        const finalMessage = await factory.createTrainFormatMessageTask(results).invoke();
+        await factory.createMessageTask(channel, finalMessage).invoke();
+
+        // const builder;
+
+        // return builder.addMessageTask(() => ({
+        //            channel,
+        //            text: "Did someone mention... _Trains_?"
+        //        }))
+        //        .addWebGetTask(() => process.env.TRAIN_URL)
+        //        .addTrainHtmlParseTask()
+        //        .addTrainFormatMessageTask()
+        //        .addMessageTask((text) => ({
+        //             channel,
+        //             text
+        //        }))
+        //        .invoke();
     }
 }
