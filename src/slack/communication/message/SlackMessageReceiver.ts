@@ -1,22 +1,22 @@
+import { CLIENT_EVENTS, RtmClient, RtmConnectResult, RtmStartResult } from "@slack/client";
+
 import { SlackMessageEvent, SlackMessageEventManager } from "../../";
 import { BaseMessageReceiver } from "../../../common/core/";
 import { IMessage, IMessageEvent, IMessageEventManager } from "../../../common/interface/";
-
-import { CLIENT_EVENTS, RtmClient, RtmConnectResult, RtmStartResult } from "@slack/client";
 
 export class SlackMessageReceiver extends BaseMessageReceiver {
     private rtmClient: RtmClient;
     protected managers: IMessageEventManager[];
 
-    constructor(slackToken: string) {
+    constructor(rtmClient: RtmClient, eventManager: IMessageEventManager) {
         super();
 
-        this.rtmClient = new RtmClient(slackToken);
+        this.rtmClient = rtmClient;
         this.rtmClient.on(CLIENT_EVENTS.RTM.AUTHENTICATED, this.onAuthenticated.bind(this));
         this.rtmClient.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, this.onConnected.bind(this));
         this.rtmClient.on(CLIENT_EVENTS.RTM.RAW_MESSAGE, this.onMessage.bind(this));
 
-        this.managers.push(new SlackMessageEventManager());
+        this.managers.push(eventManager);
     }
 
     // IConnection

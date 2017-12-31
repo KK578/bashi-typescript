@@ -4,12 +4,12 @@ import { IMessageEvent, IMessageEventHandler, ITaskFactory } from "../../common/
 import { TaskFactory } from "../../factory/TaskFactory";
 
 export class TrainMessageEventHandler implements IMessageEventHandler {
-    private slackMessageSender: SlackMessageSender;
+    private url: string;
     private taskFactory: ITaskFactory;
 
-    constructor() {
-        this.slackMessageSender = new SlackMessageSender(process.env.SLACK_BOT_TOKEN);
-        this.taskFactory = new TaskFactory(this.slackMessageSender);
+    constructor(url: string, taskFactory: ITaskFactory) {
+        this.url = url;
+        this.taskFactory = taskFactory;
     }
 
     public canHandleEvent(event: IMessageEvent): Promise<boolean> {
@@ -23,24 +23,9 @@ export class TrainMessageEventHandler implements IMessageEventHandler {
         const channel = event.message.channel;
 
         await factory.createMessageTask(channel, "Did someone mention... _Trains_?").invoke();
-        const html = await factory.createWebGetTask(process.env.TRAIN_URL).invoke();
+        const html = await factory.createWebGetTask(this.url).invoke();
         const results = await factory.createTrainHtmlParseTask(html).invoke();
         const finalMessage = await factory.createTrainFormatMessageTask(results).invoke();
         await factory.createMessageTask(channel, finalMessage).invoke();
-
-        // const builder;
-
-        // return builder.addMessageTask(() => ({
-        //            channel,
-        //            text: "Did someone mention... _Trains_?"
-        //        }))
-        //        .addWebGetTask(() => process.env.TRAIN_URL)
-        //        .addTrainHtmlParseTask()
-        //        .addTrainFormatMessageTask()
-        //        .addMessageTask((text) => ({
-        //             channel,
-        //             text
-        //        }))
-        //        .invoke();
     }
 }

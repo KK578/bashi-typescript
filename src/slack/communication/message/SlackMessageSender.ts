@@ -5,8 +5,8 @@ import { IMessage, IMessageSender } from "../../../common/interface/";
 export class SlackMessageSender implements IMessageSender {
     private webClient: WebClient;
 
-    constructor(slackToken: string) {
-        this.webClient = new WebClient(slackToken);
+    constructor(webClient: WebClient) {
+        this.webClient = webClient;
     }
 
     // IConnection
