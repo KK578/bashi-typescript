@@ -17,6 +17,6 @@ export class TrainFormatMessageTask implements IFormatMessageTask {
         const table = this.data.map((result) => `${result.time}: ${result.platform}`)
                           .join("\n");
 
-        return Promise.resolve(table);
+        return Promise.resolve(header + table);
     }
 }

@@ -6,6 +6,7 @@
         },
         "trailing-comma": false,
         "eofline": true,
+        "one-line": false,
 
         // TypeScript
         "member-access": "error",
